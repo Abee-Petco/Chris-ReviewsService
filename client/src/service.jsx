@@ -36,7 +36,8 @@ class ReviewsModule extends React.Component {
       itemID = splitItemID[1];
     }
 
-    axios.get(`http://${IP_ADDRESS}:3001/reviews/${itemID}`)
+    axios
+      .get(`http://${IP_ADDRESS}:3001/reviews/${itemID}`)
       .then((results) => {
         const { reviewAverage, numberOfReviews, allReviews } = results.data;
 
@@ -59,9 +60,12 @@ class ReviewsModule extends React.Component {
   render() {
     // console.log('Review freshly mounted')
     return (
-      <div id="reviews-module" style={{ display: 'flex', flexDirection: 'column', flexShrink: '0' }}>
+      <div
+        id="reviews-module"
+        style={{ display: 'flex', flexDirection: 'column', flexShrink: '0' }}
+      >
         {/*The tag directly below this is for testing purposes only. Make sure to comment out before building for production*/}
-        {/* <div id='MODAL_ATTACH_POINT' /> */}
+        <div id="MODAL_ATTACH_POINT" />
         <ReviewHeader />
         <ReviewBody />
         <Reviews />
@@ -71,12 +75,20 @@ class ReviewsModule extends React.Component {
   }
 }
 
-const mapDispatch = function(dispatch) {
+const mapDispatch = function (dispatch) {
   return {
-    dispatchUpdateReviewAverage: (reviewAverage) => { dispatch(updateReviewAverage(reviewAverage)); },
-    dispatchUpdateNumberOfReviews: (numberOfReviews) => { dispatch(updateNumberOfReviews(numberOfReviews)); },
-    dispatchUpdateAllReviews: (allReviews) => { dispatch(updateAllReviews(allReviews)); },
-    dispatchUpdateFilteredReviews: (allReviews) => { dispatch(updateFilteredReviews(allReviews)); },
+    dispatchUpdateReviewAverage: (reviewAverage) => {
+      dispatch(updateReviewAverage(reviewAverage));
+    },
+    dispatchUpdateNumberOfReviews: (numberOfReviews) => {
+      dispatch(updateNumberOfReviews(numberOfReviews));
+    },
+    dispatchUpdateAllReviews: (allReviews) => {
+      dispatch(updateAllReviews(allReviews));
+    },
+    dispatchUpdateFilteredReviews: (allReviews) => {
+      dispatch(updateFilteredReviews(allReviews));
+    },
   };
 };
 
