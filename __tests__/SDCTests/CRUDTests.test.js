@@ -120,6 +120,7 @@ describe('server', () => {
             .put(`/reviews/${existingReview.reviewId}`)
             .send({ title: 'I was Updated' })
             .then((response) => {
+              expect(response.statusCode).toBe(200);
               expect(typeof +existingReview.reviewId).toBe('number');
               expect(JSON.parse(response.text).title).toBe('I was Updated');
             });
