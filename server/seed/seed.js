@@ -9,7 +9,27 @@ const detailedItemReviews = [
     itemId: '100',
     reviewAverage: '3.5',
     numberOfReviews: 19,
-    allReviews: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+    allReviews: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+    ],
   },
 ];
 
@@ -19,7 +39,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2020-05-06T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review: 'Morbi commodo justo tortor, malesuada imperdiet justo condimentum eget. Nam fringilla orci dui, non semper nisl venenatis eget. Phasellus nec.',
+    review:
+      'Morbi commodo justo tortor, malesuada imperdiet justo condimentum eget. Nam fringilla orci dui, non semper nisl venenatis eget. Phasellus nec.',
     username: 'ChonkyCat',
     recommended: true,
     yeses: 5,
@@ -32,7 +53,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2019-05-06T22:07:57.603Z',
     title: 'consectetur adipiscing elit',
-    review: 'Mauris eget libero ex. Nulla facilisis luctus maximus. Proin eget euismod orci. Cras finibus, magna.',
+    review:
+      'Mauris eget libero ex. Nulla facilisis luctus maximus. Proin eget euismod orci. Cras finibus, magna.',
     username: 'TummyScratcher',
     recommended: true,
     yeses: 1,
@@ -45,7 +67,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2019-12-06T22:07:57.603Z',
     title: 'Ut vestibulum',
-    review: 'Aenean semper nunc ac consectetur vestibulum. Morbi et quam placerat, tincidunt lectus in, aliquam sapien. Fusce ultrices nibh in sapien imperdiet, nec semper urna consectetur. Proin accumsan nec mauris ac vehicula. In hac habitasse platea.',
+    review:
+      'Aenean semper nunc ac consectetur vestibulum. Morbi et quam placerat, tincidunt lectus in, aliquam sapien. Fusce ultrices nibh in sapien imperdiet, nec semper urna consectetur. Proin accumsan nec mauris ac vehicula. In hac habitasse platea.',
     username: 'NotACatLady',
     recommended: true,
     yeses: 5,
@@ -58,7 +81,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2020-03-15T22:07:57.603Z',
     title: 'massa vulputate bibendum auctor',
-    review: 'Suspendisse bibendum lectus sit amet ante auctor consequat. Sed malesuada urna erat, tempus sollicitudin augue porttitor sit amet. Duis viverra.',
+    review:
+      'Suspendisse bibendum lectus sit amet ante auctor consequat. Sed malesuada urna erat, tempus sollicitudin augue porttitor sit amet. Duis viverra.',
     username: 'CatButt',
     recommended: true,
     yeses: 20,
@@ -71,7 +95,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2018-07-06T22:07:57.603Z',
     title: 'felis odio accumsan ex',
-    review: 'Suspendisse bibendum lectus sit amet ante auctor consequat. Sed malesuada urna erat, tempus sollicitudin augue porttitor sit amet. Duis viverra.',
+    review:
+      'Suspendisse bibendum lectus sit amet ante auctor consequat. Sed malesuada urna erat, tempus sollicitudin augue porttitor sit amet. Duis viverra.',
     username: 'Froggy',
     recommended: true,
     yeses: 1,
@@ -84,7 +109,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2019-01-30T22:07:57.603Z',
     title: 'eget',
-    review: 'Suspendisse arcu dolor, hendrerit ultrices lacus et, vulputate finibus nulla. Cras enim augue, molestie vitae arcu fermentum, commodo egestas nunc. Curabitur massa tellus, iaculis in turpis nec, rutrum scelerisque turpis. Donec mattis, lorem.',
+    review:
+      'Suspendisse arcu dolor, hendrerit ultrices lacus et, vulputate finibus nulla. Cras enim augue, molestie vitae arcu fermentum, commodo egestas nunc. Curabitur massa tellus, iaculis in turpis nec, rutrum scelerisque turpis. Donec mattis, lorem.',
     username: 'PikaPika',
     recommended: true,
     yeses: 4,
@@ -97,7 +123,8 @@ const detailedIndividualReviews = [
     score: 5,
     date: '2020-01-06T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review: 'Nunc ex massa, porttitor pulvinar pharetra sit amet, consequat quis lorem. Vestibulum efficitur.',
+    review:
+      'Nunc ex massa, porttitor pulvinar pharetra sit amet, consequat quis lorem. Vestibulum efficitur.',
     username: 'catdude',
     recommended: true,
     yeses: 10,
@@ -110,7 +137,8 @@ const detailedIndividualReviews = [
     score: 4,
     date: '2020-01-21T21:07:57.603Z',
     title: 'consectetur adipiscing elit',
-    review: 'Nullam accumsan metus justo, non semper quam iaculis vel. Proin in eros lacus. Integer at velit.',
+    review:
+      'Nullam accumsan metus justo, non semper quam iaculis vel. Proin in eros lacus. Integer at velit.',
     username: 'CVCat',
     recommended: true,
     yeses: 2,
@@ -123,7 +151,8 @@ const detailedIndividualReviews = [
     score: 4,
     date: '2018-04-06T22:07:57.603Z',
     title: 'Curabitur ultrices tempus lorem',
-    review: 'Quisque dapibus, urna ac varius mattis, nisi nunc venenatis urna, a.',
+    review:
+      'Quisque dapibus, urna ac varius mattis, nisi nunc venenatis urna, a.',
     username: 'Bob',
     recommended: true,
     yeses: 10,
@@ -136,7 +165,8 @@ const detailedIndividualReviews = [
     score: 4,
     date: '2020-05-05T22:07:57.603Z',
     title: 'Ut a lectus non nibh ornare facilisis',
-    review: 'Fusce quis erat ornare, tincidunt odio eget, tempor velit. Donec placerat vestibulum diam. Maecenas molestie congue mauris.',
+    review:
+      'Fusce quis erat ornare, tincidunt odio eget, tempor velit. Donec placerat vestibulum diam. Maecenas molestie congue mauris.',
     username: 'ElGatoSupreme',
     recommended: true,
     yeses: 10,
@@ -149,7 +179,8 @@ const detailedIndividualReviews = [
     score: 4,
     date: '2020-02-06T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review: 'Praesent justo ante, porta at dui eget, placerat scelerisque ex. In hac habitasse platea dictumst. Maecenas at libero ut dolor.',
+    review:
+      'Praesent justo ante, porta at dui eget, placerat scelerisque ex. In hac habitasse platea dictumst. Maecenas at libero ut dolor.',
     username: 'Winifred',
     recommended: true,
     yeses: 6,
@@ -162,7 +193,8 @@ const detailedIndividualReviews = [
     score: 3,
     date: '2018-09-06T22:07:57.603Z',
     title: 'consectetur adipiscing elit',
-    review: 'Mauris sit amet risus purus. Aenean sem ex, aliquam non velit a, varius lobortis neque. Donec tincidunt sit amet mauris eget suscipit. Sed eget lectus leo. Praesent condimentum metus lacus, et tincidunt ipsum fringilla eu.',
+    review:
+      'Mauris sit amet risus purus. Aenean sem ex, aliquam non velit a, varius lobortis neque. Donec tincidunt sit amet mauris eget suscipit. Sed eget lectus leo. Praesent condimentum metus lacus, et tincidunt ipsum fringilla eu.',
     username: 'Sarah',
     recommended: true,
     yeses: 20,
@@ -175,7 +207,8 @@ const detailedIndividualReviews = [
     score: 3,
     date: '2019-07-06T22:07:57.603Z',
     title: 'Donec in congue diam',
-    review: 'Suspendisse mollis in felis non blandit. Proin pellentesque dui sed turpis pharetra, a pretium odio fermentum. In hac habitasse platea dictumst. Etiam cursus augue ut.',
+    review:
+      'Suspendisse mollis in felis non blandit. Proin pellentesque dui sed turpis pharetra, a pretium odio fermentum. In hac habitasse platea dictumst. Etiam cursus augue ut.',
     username: 'Emily',
     recommended: false,
     yeses: 0,
@@ -188,7 +221,8 @@ const detailedIndividualReviews = [
     score: 3,
     date: '2020-03-24T22:07:57.603Z',
     title: 'Praesent finibus leo nec nisl auctor luctus',
-    review: 'Ut gravida ultrices cursus. Suspendisse potenti. Aenean in mi euismod, tempor ligula vel, ornare nisl. Pellentesque id fringilla urna.',
+    review:
+      'Ut gravida ultrices cursus. Suspendisse potenti. Aenean in mi euismod, tempor ligula vel, ornare nisl. Pellentesque id fringilla urna.',
     username: 'Mary',
     recommended: true,
     yeses: 3,
@@ -201,7 +235,8 @@ const detailedIndividualReviews = [
     score: 2,
     date: '2020-05-16T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review: 'Suspendisse ultricies ac ligula et molestie. Quisque nisi ante, maximus in mattis sed, finibus id magna. Pellentesque quis finibus ex, non congue augue.',
+    review:
+      'Suspendisse ultricies ac ligula et molestie. Quisque nisi ante, maximus in mattis sed, finibus id magna. Pellentesque quis finibus ex, non congue augue.',
     username: 'Binx',
     recommended: false,
     yeses: 0,
@@ -214,7 +249,8 @@ const detailedIndividualReviews = [
     score: 2,
     date: '2018-05-06T22:07:57.603Z',
     title: 'consectetur adipiscing elit',
-    review: 'Vestibulum dapibus maximus tellus, ac imperdiet diam bibendum nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacus neque, sollicitudin at mauris a, aliquam laoreet enim. Duis turpis urna, auctor at facilisis eleifend, euismod nec odio. Mauris blandit est sed augue lacinia, nec ultricies.',
+    review:
+      'Vestibulum dapibus maximus tellus, ac imperdiet diam bibendum nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam lacus neque, sollicitudin at mauris a, aliquam laoreet enim. Duis turpis urna, auctor at facilisis eleifend, euismod nec odio. Mauris blandit est sed augue lacinia, nec ultricies.',
     username: 'Billy',
     recommended: false,
     yeses: 3,
@@ -240,7 +276,8 @@ const detailedIndividualReviews = [
     score: 1,
     date: '2018-11-01T22:07:57.603Z',
     title: 'Cras in felis semper',
-    review: 'Etiam a est sit amet libero aliquam tristique id at libero. Sed id condimentum risus, nec sollicitudin mauris. Duis.',
+    review:
+      'Etiam a est sit amet libero aliquam tristique id at libero. Sed id condimentum risus, nec sollicitudin mauris. Duis.',
     username: 'Max',
     recommended: false,
     yeses: 1,
@@ -253,7 +290,8 @@ const detailedIndividualReviews = [
     score: 1,
     date: '2020-02-14T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review: 'Donec eget ligula id mi tempor viverra nec quis felis. Proin in facilisis justo.',
+    review:
+      'Donec eget ligula id mi tempor viverra nec quis felis. Proin in facilisis justo.',
     username: 'Allison',
     recommended: false,
     yeses: 2,
@@ -287,7 +325,7 @@ const mapYeses = {
   9: 3,
 };
 
-const generateYeses = function() {
+const generateYeses = function () {
   const rollYeses = Math.floor(Math.random() * 10);
 
   return mapYeses[rollYeses];
@@ -297,7 +335,7 @@ const generateYeses = function() {
 //Recommended
 /////////////////////////////////////
 
-const generateRecommended = function(score) {
+const generateRecommended = function (score) {
   if (score > 3) {
     return true;
   } else if (score < 3) {
@@ -317,7 +355,7 @@ const LoremIpsumTitle = new LoremIpsum({
   },
 });
 
-const generateReviewTitle = function() {
+const generateReviewTitle = function () {
   return LoremIpsumTitle.generateSentences(1);
 };
 
@@ -349,9 +387,11 @@ const reviewLengthMapping = {
   9: 3,
 };
 
-const generateReviewText = function() {
+const generateReviewText = function () {
   const numberOfParagraphsRoll = Math.floor(Math.random() * 10);
-  return LoremIpsumText.generateParagraphs(reviewLengthMapping[numberOfParagraphsRoll]);
+  return LoremIpsumText.generateParagraphs(
+    reviewLengthMapping[numberOfParagraphsRoll]
+  );
 };
 
 /////////////////////////////////////
@@ -359,12 +399,12 @@ const generateReviewText = function() {
 /////////////////////////////////////
 const scoreMapping = {
   5: 0.55,
-  4: 0.40,
+  4: 0.4,
   3: 0.25,
-  2: 0.20,
+  2: 0.2,
 };
 
-const generateScore = function() {
+const generateScore = function () {
   const roll = Math.random();
 
   if (roll < scoreMapping['2']) {
@@ -402,9 +442,101 @@ const mapMonth = {
   2018: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 };
 
-const thirtyOneDayMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-const thirtyDayMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-const twentyEightDayMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
+const thirtyOneDayMonth = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+];
+const thirtyDayMonth = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+];
+const twentyEightDayMonth = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+];
 
 const mapDay = {
   1: thirtyOneDayMonth,
@@ -421,7 +553,7 @@ const mapDay = {
   12: thirtyOneDayMonth,
 };
 
-const generateDate = function() {
+const generateDate = function () {
   // '2020-06-06T22:07:57.603Z' standard
   // '2020-06-06 22:07:57.603' To get accurate moment from user's local time, convert above time stamp to T-less and Z-less format before passing into moment().fromNow()
   const rollYear = Math.floor(Math.random() * 3);
@@ -480,7 +612,7 @@ const generateDate = function() {
 //   promotion: false,
 // },
 
-const generateReview = function() {
+const generateReview = function () {
   individualReviewCounter++;
   const reviewId = individualReviewCounter;
   const score = generateScore();
@@ -509,7 +641,7 @@ const generateReview = function() {
   };
 };
 
-const generateReviews = function(numberToGenerate) {
+const generateReviews = function (numberToGenerate) {
   const reviews = [];
   let count = numberToGenerate;
 
@@ -522,7 +654,7 @@ const generateReviews = function(numberToGenerate) {
   return reviews;
 };
 
-const generateRecord = function() {
+const generateRecord = function () {
   const itemId = itemIdTracker;
   const numberOfReviews = Math.floor(Math.random() * 14 + 4);
   const randomlyGeneratedReviews = generateReviews(numberOfReviews);
@@ -549,7 +681,9 @@ const generateRecord = function() {
 
         if (tenthsPlace === 10) {
           reviewAverageArray[2] = '0';
-          reviewAverageArray[0] = (Number.parseInt(reviewAverageArray[0], 10) + 1).toString();
+          reviewAverageArray[0] = (
+            Number.parseInt(reviewAverageArray[0], 10) + 1
+          ).toString();
         }
       }
     }
@@ -570,9 +704,16 @@ const generateRecord = function() {
 /////////////////////////////////////
 //Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker is being compared to
 /////////////////////////////////////
-while (itemIdTracker <= 199) {
-  generateRecord();
-  itemIdTracker++;
+if (process.env.node_env !== 'test') {
+  while (itemIdTracker <= 199) {
+    generateRecord();
+    itemIdTracker++;
+  }
+} else {
+  while (itemIdTracker <= 126) {
+    generateRecord();
+    itemIdTracker++;
+  }
 }
 
 module.exports.detailedItemReviews = detailedItemReviews;

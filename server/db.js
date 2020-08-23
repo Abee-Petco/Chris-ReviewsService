@@ -1,7 +1,23 @@
 const mongoose = require('mongoose');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const Mockgoose = require('mockgoose').Mockgoose;
+
+const mockgoose = new Mockgoose(mongoose);
 const { DATABASE_LOCAL_ADDRESS } = require('./enviromentalVariables.js');
 
-mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`);
+if (process.env.node_env === 'test') {
+  mockgoose.prepareStorage().then(() => {
+    mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`, {
+      useNewParser: true,
+      useUnifiedTopology: true,
+    });
+  });
+} else {
+  mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+}
 
 const db = mongoose.connection;
 
@@ -26,19 +42,30 @@ const individualReviewsSchema = new mongoose.Schema({
   promotion: Boolean,
 });
 
-const AggregateReview = mongoose.model('Aggregate_Review', aggregateReviewsSchema);
-const IndividualReview = mongoose.model('Individual_Review', individualReviewsSchema);
+const AggregateReview = mongoose.model(
+  'Aggregate_Review',
+  aggregateReviewsSchema
+);
+const IndividualReview = mongoose.model(
+  'Individual_Review',
+  individualReviewsSchema
+);
 
-const retrieveAggregateReview = function(itemId) {
+const retrieveAggregateReview = function (itemId) {
   return AggregateReview.findOne({ itemId }).select('-_id -itemId -__v').exec();
 };
 
-const retrieveAggregateReviews = function(itemIds) {
-  return AggregateReview.find({ itemId: { $in: itemIds } }).select('-_id -allReviews -__v').exec();
+const retrieveAggregateReviews = function (itemIds) {
+  return AggregateReview.find({ itemId: { $in: itemIds } })
+    .select('-_id -allReviews -__v')
+    .exec();
 };
 
-const retrieveIndividualReviews = function(reviewIds) {
-  return IndividualReview.find({ reviewId: { $in: reviewIds } }).select('-_id -reviewId -__v').sort({ date: -1 }).exec();
+const retrieveIndividualReviews = function (reviewIds) {
+  return IndividualReview.find({ reviewId: { $in: reviewIds } })
+    .select('-_id -reviewId -__v')
+    .sort({ date: -1 })
+    .exec();
 };
 
 module.exports.db = db;
