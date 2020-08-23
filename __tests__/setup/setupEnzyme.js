@@ -9,7 +9,6 @@ const ReactRedux = require('react-redux');
 const Redux = require('redux');
 
 Enzyme.configure({ adapter: new Adapter() });
-
 window.HTMLElement.prototype.scrollIntoView = function () {};
 
 global.React = React;
