@@ -91,4 +91,40 @@ describe('server', () => {
         });
     });
   });
+
+  describe('PUT route /reviews/:reviewId', () => {
+    const reviewToPostThenUpdate = {
+      score: 1,
+      date: '2018-14-29T05:20:11.603Z',
+      title: 'New POSTed Review To Update',
+      review:
+        'Nostrud fugiat aute excepteur mollit adipisicing quis aliquip. Nisi aliquip culpa. Fugiat sint nulla duis minim nulla. Deserunt Lorem occaecat ipsum aliqua ut aliquip nostrud exercitation deserunt.',
+      username: 'Ham Sandwich',
+      recommended: false,
+      yeses: 0,
+      noes: 0,
+      verified: true,
+      promotion: true,
+    };
+    it('Successfully updates a review using the reviewId of existing Review', () => {
+      return request(server)
+        .post('/reviews')
+        .send(reviewToPostThenUpdate)
+        .then((response) => {
+          expect(response.body.title).toBe('New POSTed Review To Update');
+
+          return response.body;
+        })
+        .then((existingReview) => {
+          return request(server)
+            .put(`/reviews/${existingReview.reviewId}`)
+            .send({ title: 'I was Updated' })
+            .then((response) => {
+              expect(response.statusCode).toBe(200);
+              expect(typeof +existingReview.reviewId).toBe('number');
+              expect(JSON.parse(response.text).title).toBe('I was Updated');
+            });
+        });
+    });
+  });
 });

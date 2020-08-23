@@ -21,9 +21,21 @@ const addId = (document) => {
 
 const addReview = (document) => {
   return IndividualReview.create([document])
-    .then(() => {
-      console.log('Successfully added new review');
-      return document;
+    .then((result) => {
+      return result[0];
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const updateReview = (id, document) => {
+  return IndividualReview.findOneAndUpdate({ reviewId: id }, document, {
+    new: true,
+  })
+    .then((result) => {
+      console.log('Found and updated', result);
+      return result;
     })
     .catch((err) => {
       throw err;
@@ -32,3 +44,4 @@ const addReview = (document) => {
 
 module.exports.addId = addId;
 module.exports.addReview = addReview;
+module.exports.updateReview = updateReview;
