@@ -1,12 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
+const { addId, addReview } = require('./server/models/index.js');
 // const fs = require('fs');
 // var zlib = require('zlib');
 const db = require('./server/db.js');
-const { IP_ADDRESS, IP_ADDRESS_E, IP_ADDRESS_K } = require('./server/enviromentalVariables.js');
+const {
+  IP_ADDRESS,
+  IP_ADDRESS_E,
+  IP_ADDRESS_K,
+} = require('./server/enviromentalVariables.js');
 
 const server = express();
+const seedTestDb = require('./server/seedTestDb.js');
 
 // function generateGzipHTML () {
 //   fs.readFile(`${__dirname}/../client/src/index.html`, (error, data) => {
@@ -23,9 +30,15 @@ const server = express();
 // }
 
 // generateGzipHTML();
-
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 server.use(morgan('dev'));
-server.use(function(req, res, next) {
+
+if (process.env.node_env === 'test') {
+  seedTestDb();
+}
+
+server.use(function (req, res, next) {
   const { referer } = req.headers;
 
   if (referer) {
@@ -115,12 +128,31 @@ server.get('/reviews/:itemId', (req, res) => {
     .then((data) => {
       if (data) {
         const { reviewAverage, numberOfReviews } = aggregateReview;
-        res.status(200).send({ reviewAverage, numberOfReviews, allReviews: data });
+        res
+          .status(200)
+          .send({ reviewAverage, numberOfReviews, allReviews: data });
       }
     })
     .catch((err) => {
       res.status(500).send(err);
       console.log(err);
+    });
+});
+
+server.post('/reviews', (req, res) => {
+  const newReview = addId(req.body);
+  newReview
+    .then((newReview) => {
+      addReview(newReview).then((doc) => {
+        console.log('Added', doc);
+        res.send(doc);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(500)
+        .send('There was a problem, please refresh and try again.');
     });
 });
 
@@ -135,4 +167,4 @@ server.get('/product', (req, res) => {
   }
 });
 
-server.listen(3001);
+module.exports = server;

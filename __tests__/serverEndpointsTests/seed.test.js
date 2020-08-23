@@ -1,5 +1,8 @@
 const { expect } = require('chai');
-const { detailedItemReviews, detailedIndividualReviews } = require('./seed.js');
+const {
+  detailedItemReviews,
+  detailedIndividualReviews,
+} = require('../../server/seed/seed.js');
 
 describe('The seed.js file', () => {
   describe('correctly renders all the records in detailedItemReviews, since', () => {
@@ -394,7 +397,6 @@ describe('The seed.js file', () => {
         '57': 1,
         '58': 1,
         '59': 1,
-
       };
 
       detailedIndividualReviews.forEach((reviewObject) => {
