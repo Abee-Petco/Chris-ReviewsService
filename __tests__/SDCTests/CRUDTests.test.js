@@ -1,6 +1,10 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const server = require('../../index.js');
+// const {
+//   retrieveIndividualReviews,
+//   IndividualReview,
+// } = require('../../server/db.js');
 
 describe('server', () => {
   afterAll(() => {
@@ -111,6 +115,7 @@ describe('server', () => {
         .post('/reviews')
         .send(reviewToPostThenUpdate)
         .then((response) => {
+          expect(response.statusCode).toBe(200);
           expect(response.body.title).toBe('New POSTed Review To Update');
 
           return response.body;
@@ -123,6 +128,44 @@ describe('server', () => {
               expect(response.statusCode).toBe(200);
               expect(typeof +existingReview.reviewId).toBe('number');
               expect(JSON.parse(response.text).title).toBe('I was Updated');
+            });
+        });
+    });
+  });
+
+  describe('DELETE route reviews/:reviewId', () => {
+    const reviewToPostThenDelete = {
+      score: 1,
+      date: '2018-14-29T05:20:11.603Z',
+      title: 'New POSTed Review To Delete',
+      review:
+        'Nostrud fugiat aute excepteur mollit adipisicing quis aliquip. Nisi aliquip culpa. Fugiat sint nulla duis minim nulla. Deserunt Lorem occaecat ipsum aliqua ut aliquip nostrud exercitation deserunt.',
+      username: 'Ham Sandwich',
+      recommended: false,
+      yeses: 0,
+      noes: 0,
+      verified: true,
+      promotion: true,
+    };
+
+    it('successfully DELETES a review of specified reviewId', () => {
+      return request(server)
+        .post('/reviews')
+        .send(reviewToPostThenDelete)
+        .then((response) => {
+          expect(response.statusCode).toBe(200);
+          expect(response.body.title).toBe('New POSTed Review To Delete');
+
+          return response.body;
+        })
+        .then((existingReview) => {
+          return request(server)
+            .delete(`/reviews/${existingReview.reviewId}`)
+            .then((response) => {
+              expect(response.statusCode).toBe(200);
+              expect(JSON.parse(response.text).ok).toBe(1);
+              expect(JSON.parse(response.text).deletedCount).toBe(1);
+              return existingReview.reviewId;
             });
         });
     });

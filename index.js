@@ -2,7 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
-const { addId, addReview, updateReview } = require('./server/models/index.js');
+const {
+  addId,
+  addReview,
+  updateReview,
+  deleteReview,
+} = require('./server/models/index.js');
 // const fs = require('fs');
 // var zlib = require('zlib');
 const db = require('./server/db.js');
@@ -163,6 +168,17 @@ server.put('/reviews/:reviewId', (req, res) => {
   updateReview(id, update)
     .then((doc) => {
       res.send(doc);
+    })
+    .catch((err) => {
+      throw err;
+    });
+});
+
+server.delete('/reviews/:reviewId', (req, res) => {
+  const id = req.params.reviewId;
+  deleteReview(id)
+    .then((result) => {
+      res.send(result);
     })
     .catch((err) => {
       throw err;
