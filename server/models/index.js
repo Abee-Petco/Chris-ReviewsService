@@ -42,6 +42,17 @@ const updateReview = (id, document) => {
     });
 };
 
+const deleteReview = (id) => {
+  return IndividualReview.deleteOne({ reviewId: id })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports.addId = addId;
 module.exports.addReview = addReview;
 module.exports.updateReview = updateReview;
+module.exports.deleteReview = deleteReview;
