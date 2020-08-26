@@ -3,6 +3,7 @@
 ## GET (inherited)
 
 Endpoint: /averageReviews/:itemId
+
 Server Response:
 {
 reviewAverage: “String between 0-5 representing average number of stars for that item”,
@@ -16,6 +17,7 @@ THEN server response:
 An array filled with objects. Each object is the object that would normally return, but with the additional property "itemId"
 
 Endpoint: /reviews/:itemId
+
 Server Response:
 {
 reviewAverage: “String representing float number between 0-5 representing average number of stars for that item”,
@@ -40,6 +42,7 @@ promotion: “boolean of whether or not review was collected during a promotion�
 ## POST
 
 Endpoint: /reviews
+
 Server Response: POST route adds unique reviewId property, and integer, to the submitted review object.
 This is then submitted to the database which responds with the reviewId enhanced object that was stored.
 this is sent in the POST response as confirmation.
@@ -62,6 +65,7 @@ reviewId: 123
 ## PUT
 
 Endpoint: /reviews/:reviewId
+
 Server Response: StatusCode: 200 on success, PUT route makes changes to review document using supplied fields in need of change.
 The response from the database is sent in the PUT response, which is the newly modified document.
 
@@ -70,6 +74,7 @@ Response has same structure as POST response.
 ## DELETE
 
 Endpoint: /reviews/:reviewId
+
 Server Response: confirmation sent from db query signifying that deletion occured.
 
 {
