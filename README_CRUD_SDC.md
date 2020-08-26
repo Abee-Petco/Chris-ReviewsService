@@ -62,7 +62,7 @@ reviewId: 123
 ## PUT
 
 Endpoint: /reviews/:reviewId
-Server Response: PUT route makes changes to review document using supplied fields in need of change.
+Server Response: StatusCode: 200 on success, PUT route makes changes to review document using supplied fields in need of change.
 The response from the database is sent in the PUT response, which is the newly modified document.
 
 Response has same structure as POST response.
