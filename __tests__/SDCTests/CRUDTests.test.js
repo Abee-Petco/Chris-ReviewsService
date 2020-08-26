@@ -165,7 +165,7 @@ describe('server', () => {
               expect(response.statusCode).toBe(200);
               expect(JSON.parse(response.text).ok).toBe(1);
               expect(JSON.parse(response.text).deletedCount).toBe(1);
-              return existingReview.reviewId;
+              // return existingReview.reviewId;
             });
         });
     });
