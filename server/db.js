@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Mockgoose = require('mockgoose').Mockgoose;
@@ -8,7 +9,7 @@ const { DATABASE_LOCAL_ADDRESS } = require('./enviromentalVariables.js');
 if (process.env.node_env === 'test') {
   mockgoose.prepareStorage().then(() => {
     mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`, {
-      useNewParser: true,
+      useNewUrlParser: true,
       useUnifiedTopology: true,
     });
   });
@@ -22,14 +23,15 @@ if (process.env.node_env === 'test') {
 const db = mongoose.connection;
 
 const aggregateReviewsSchema = new mongoose.Schema({
-  itemId: String,
-  reviewAverage: String,
+  itemId: Number,
+  reviewAverage: Number,
   numberOfReviews: Number,
-  allReviews: [Number],
+  allReviews: String,
 });
 
 const individualReviewsSchema = new mongoose.Schema({
   reviewId: Number,
+  itemId: Number,
   score: Number,
   date: String,
   title: String,
@@ -65,7 +67,18 @@ const retrieveIndividualReviews = function (reviewIds) {
   return IndividualReview.find({ reviewId: { $in: reviewIds } })
     .select('-_id -reviewId -__v')
     .sort({ date: -1 })
-    .exec();
+    .then((data) => {
+      const reviews = data.map((review) => {
+        review.verified = JSON.parse(review.verified);
+        review.recommended = JSON.parse(review.recommended);
+        review.promotion = JSON.parse(review.promotion);
+        return review;
+      });
+      return reviews;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };
 
 module.exports.db = db;
