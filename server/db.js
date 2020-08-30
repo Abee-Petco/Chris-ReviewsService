@@ -23,7 +23,7 @@ if (process.env.node_env === 'test') {
 const db = mongoose.connection;
 
 const aggregateReviewsSchema = new mongoose.Schema({
-  itemId: Number,
+  itemId: { type: Number, index: true },
   reviewAverage: Number,
   numberOfReviews: Number,
   allReviews: String,
@@ -31,7 +31,7 @@ const aggregateReviewsSchema = new mongoose.Schema({
 
 const individualReviewsSchema = new mongoose.Schema({
   reviewId: Number,
-  itemId: Number,
+  itemId: { type: Number, index: true },
   score: Number,
   date: String,
   title: String,
@@ -52,6 +52,9 @@ const IndividualReview = mongoose.model(
   'Individual_Review',
   individualReviewsSchema
 );
+
+AggregateReview.syncIndexes();
+IndividualReview.syncIndexes();
 
 const retrieveAggregateReview = function (itemId) {
   return AggregateReview.findOne({ itemId }).select('-_id -itemId -__v').exec();

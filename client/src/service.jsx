@@ -48,7 +48,7 @@ class ReviewsModule extends React.Component {
 
         if (numberOfReviews === 0) {
           store.dispatch(updateReviewRange('RESET', [0, -1]));
-        } else if (numberOfReviews < 8) {
+        } else if (numberOfReviews < 2) {
           store.dispatch(updateReviewRange('RESET', [0, numberOfReviews - 1]));
         }
       })
@@ -65,7 +65,7 @@ class ReviewsModule extends React.Component {
         style={{ display: 'flex', flexDirection: 'column', flexShrink: '0' }}
       >
         {/*The tag directly below this is for testing purposes only. Make sure to comment out before building for production*/}
-        <div id="MODAL_ATTACH_POINT" />
+        {/* <div id="MODAL_ATTACH_POINT" /> */}
         <ReviewHeader />
         <ReviewBody />
         <Reviews />
