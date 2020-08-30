@@ -48,7 +48,7 @@ class ReviewsModule extends React.Component {
 
         if (numberOfReviews === 0) {
           store.dispatch(updateReviewRange('RESET', [0, -1]));
-        } else if (numberOfReviews < 8) {
+        } else if (numberOfReviews < 2) {
           store.dispatch(updateReviewRange('RESET', [0, numberOfReviews - 1]));
         }
       })

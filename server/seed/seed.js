@@ -690,7 +690,7 @@ const generateRecord = function () {
     const splitFinalNumber = reviewAverageArray.slice(0, 3);
     reviewAverage = splitFinalNumber.join('');
   }
-
+  ///////  HEREEEEEE!!!!!!!!
   detailedItemReviews.push({
     itemId,
     reviewAverage,
@@ -705,7 +705,7 @@ const generateRecord = function () {
 //Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker is being compared to
 /////////////////////////////////////
 if (process.env.node_env !== 'test') {
-  while (itemIdTracker <= 199) {
+  while (itemIdTracker <= 50099) {
     generateRecord();
     itemIdTracker++;
   }

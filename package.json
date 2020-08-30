@@ -8,11 +8,14 @@
     "testServer": "jest __tests__/serverEndpointsTests/ --runInBand --silent --coverage",
     "testSeed": "jest server/seed/seed.test.js --coverage",
     "testSDC": "jest __tests__/SDCTests/ --env=node --verbose false --watch",
-    "seedDb": "node server/seedDatabase.js",
+    "genNoSQL": "node server/seed/generateNoSQL",
+    "genSQL": "node server/seed/generateSQL",
+    "seedMongo1": "mongoimport --type csv -d PTCReviewsService -c aggregate_reviews --headerline --drop detailedItemReviews.csv",
+    "seedMongo2": "mongoimport --type csv -d PTCReviewsService -c individual_reviews --headerline --drop detailedIndividualReviews.csv",
     "server": "node index.js",
     "lint": "eslint . --ext .js,.jsx",
     "build": "webpack",
-    "start": "nodemon server.js",
+    "start": "node_env=\"development\" nodemon server.js",
     "start:test": "node_env=\"test\" nodemon server.js"
   },
   "repository": {
@@ -66,6 +69,8 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "boganipsum": "^0.2.0",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "lorem-ipsum": "^2.0.3",

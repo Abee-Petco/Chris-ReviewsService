@@ -85,7 +85,9 @@ server.get('/averageReviews/:itemId', (req, res) => {
   if (itemId.includes('array')) {
     const itemsInArray = itemId.substring(5);
     const itemIds = itemsInArray.split(',');
-    db.retrieveAggregateReviews(itemIds)
+    const itemNumIds = itemIds.map((id) => +id);
+
+    db.retrieveAggregateReviews(itemNumIds)
       .then((data) => {
         if (data) {
           res.status(200).send(data);
@@ -98,10 +100,12 @@ server.get('/averageReviews/:itemId', (req, res) => {
         console.log(err);
       });
   } else {
-    db.retrieveAggregateReview(itemId)
+    db.retrieveAggregateReview(+itemId)
       .then((data) => {
         if (data) {
-          const { reviewAverage, numberOfReviews } = data;
+          const numberOfReviews = data.numberOfReviews;
+          const reviewAverage = `${data.reviewAverage}`;
+
           res.status(200).send({ reviewAverage, numberOfReviews });
         } else {
           res.status(404).send('Item does not exist');
@@ -121,8 +125,11 @@ server.get('/reviews/:itemId', (req, res) => {
   db.retrieveAggregateReview(itemId)
     .then((data) => {
       if (data) {
-        const { allReviews } = data;
+        const allReviews = JSON.parse(data.allReviews);
+
         aggregateReview = data;
+        aggregateReview.reviewAverage = `${aggregateReview.reviewAverage}`;
+        aggregateReview.itemId = `${aggregateReview.itemId}`;
 
         return db.retrieveIndividualReviews(allReviews);
       } else {
@@ -132,7 +139,9 @@ server.get('/reviews/:itemId', (req, res) => {
     })
     .then((data) => {
       if (data) {
-        const { reviewAverage, numberOfReviews } = aggregateReview;
+        const reviewAverage = aggregateReview.reviewAverage;
+        const numberOfReviews = aggregateReview.numberOfReviews;
+
         res
           .status(200)
           .send({ reviewAverage, numberOfReviews, allReviews: data });
@@ -189,7 +198,11 @@ server.get('/product', (req, res) => {
   const { itemID } = req.query;
   const itemIdNumber = Number.parseInt(itemID, 10);
 
-  if (itemIdNumber < 100 || itemIdNumber > 199 || itemIdNumber === undefined) {
+  if (
+    itemIdNumber < 100
+    || itemIdNumber > 10000100
+    || itemIdNumber === undefined
+  ) {
     res.status(404).send('itemID invalid');
   } else {
     res.sendFile(`${__dirname}/client/public/index.html`);
