@@ -295,7 +295,7 @@ const generateReview = function () {
   const review = generateReviewText();
   const recommended = generateRecommended(score);
   const promotion = Math.random() < 0.35;
-  const user_id_users = Math.ceil(Math.random() * 1000);
+  const user_id_users = Math.ceil(Math.random() * 10000000);
   const item_id_items = itemIdTracker;
 
   return {
@@ -397,7 +397,7 @@ writerUser.pipe(fs.createWriteStream('users.csv'));
 writerYesNo.pipe(fs.createWriteStream('yeses_noes.csv'));
 
 (async () => {
-  for (itemIdTracker; itemIdTracker < 10100; itemIdTracker++) {
+  for (itemIdTracker; itemIdTracker < 10000100; itemIdTracker++) {
     const generatedSingleRecord = generateRecord();
     const item = generatedSingleRecord[0];
     const reviews = generatedSingleRecord[1];
