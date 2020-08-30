@@ -282,47 +282,32 @@ const generateDate = function () {
 //Generate record for a specific itemId, and its support functions
 /////////////////////////////////////
 
-//example review object
-// {
-//   reviewId: 1,
-//   score: 5,
-//   date: '2020-06-06T22:07:57.603Z',
-//   review: 'Morbi commodo justo tortor, malesuada imperdiet justo condimentum eget. Nam fringilla orci dui, non semper nisl venenatis eget. Phasellus nec.',
-//   username: 'ChonkyCat',
-//   recommended: true,
-//   yeses: 5,
-//   noes: 1,
-//   verified: true,
-//   promotion: false,
-// },
-
-// let detailedIndividualReviews = [];
-// let detailedItemReviews = [];
 let itemIdTracker = 100;
-let individualReviewCounter = 0;
+let individualReviewCounter = 1;
+let userTracker = 1;
+let yesNoTracker = 1;
 
 const generateReview = function () {
-  individualReviewCounter++;
-  const item_id_items = itemIdTracker;
   const review_id = individualReviewCounter;
   const score = generateScore();
   const date = generateDate();
   const title = generateReviewTitle();
   const review = generateReviewText();
-  const user_id_users = Math.ceil(Math.random() * 10000000);
   const recommended = generateRecommended(score);
   const promotion = Math.random() < 0.35;
+  const user_id_users = Math.ceil(Math.random() * 1000);
+  const item_id_items = itemIdTracker;
 
   return {
-    item_id_items,
     review_id,
     score,
     date,
     title,
     review,
-    user_id_users,
     recommended,
     promotion,
+    user_id_users,
+    item_id_items,
   };
 };
 
@@ -331,6 +316,7 @@ const generateUser = () => {
   const verified = Math.random() < 0.85;
 
   return {
+    user_id: userTracker,
     username,
     verified,
   };
@@ -345,8 +331,10 @@ const generateYandN = (number) => {
     const yesNos = {
       yeses,
       noes,
+      review_id_reviews: yesNoTracker,
     };
     yesAndNos.push(yesNos);
+    yesNoTracker++;
   }
 
   return yesAndNos;
@@ -360,6 +348,7 @@ const generateReviews = function (numberToGenerate) {
     const review = generateReview();
 
     reviews.push(review);
+    individualReviewCounter++;
     count--;
   }
 
@@ -367,45 +356,24 @@ const generateReviews = function (numberToGenerate) {
 };
 
 const generateRecord = function () {
-  // const itemId = itemIdTracker;
   const number_of_reviews = Math.floor(Math.random() * 3 + 2);
   const reviews = generateReviews(number_of_reviews);
   const yeses_noes = generateYandN(number_of_reviews);
-
+  const user = generateUser();
   let sum = 0;
   const allReviews = [];
+
+  userTracker++;
 
   for (let i = 0; i < reviews.length; i++) {
     allReviews.push(reviews[i].review_id);
     sum += reviews[i].score;
   }
 
-  let review_average = sum / number_of_reviews;
-
-  if (Number.isInteger(review_average)) {
-    review_average = `${review_average}.0`;
-  } else {
-    const review_averageArray = review_average.toString().split('');
-
-    if (review_averageArray[3]) {
-      if (Number.parseInt(review_averageArray[3], 10) >= 5) {
-        const tenthsPlace = Number.parseInt(review_averageArray[2], 10) + 1;
-
-        if (tenthsPlace === 10) {
-          review_averageArray[2] = '0';
-          review_averageArray[0] = (
-            Number.parseInt(review_averageArray[0], 10) + 1
-          ).toString();
-        }
-      }
-    }
-    const splitFinalNumber = review_averageArray.slice(0, 3);
-    review_average = splitFinalNumber.join('');
-  }
-
-  const user = generateUser();
+  const review_average = +(sum / number_of_reviews).toFixed(1);
 
   const item = {
+    item_id: itemIdTracker,
     review_average,
     number_of_reviews,
   };
@@ -416,12 +384,12 @@ const generateRecord = function () {
 /////////////////////////////////////
 //Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker (starting at 100) is being compared to
 /////////////////////////////////////
-console.time('The Full Deal: ');
+console.time('Start Generation: ');
 
-const writerItem = csvWriter();
-const writerUser = csvWriter();
-const writerReviews = csvWriter();
-const writerYesNo = csvWriter();
+const writerItem = csvWriter({ sendHeaders: false });
+const writerUser = csvWriter({ sendHeaders: false });
+const writerReviews = csvWriter({ sendHeaders: false });
+const writerYesNo = csvWriter({ sendHeaders: false });
 
 writerItem.pipe(fs.createWriteStream('items.csv'));
 writerReviews.pipe(fs.createWriteStream('reviews.csv'));
@@ -429,7 +397,7 @@ writerUser.pipe(fs.createWriteStream('users.csv'));
 writerYesNo.pipe(fs.createWriteStream('yeses_noes.csv'));
 
 (async () => {
-  for (itemIdTracker; itemIdTracker < 10000100; itemIdTracker++) {
+  for (itemIdTracker; itemIdTracker < 10100; itemIdTracker++) {
     const generatedSingleRecord = generateRecord();
     const item = generatedSingleRecord[0];
     const reviews = generatedSingleRecord[1];
@@ -461,5 +429,5 @@ writerYesNo.pipe(fs.createWriteStream('yeses_noes.csv'));
   writerUser.end();
   writerReviews.end();
   writerYesNo.end();
-  console.timeEnd('The Full Deal: ');
+  console.timeEnd('Finish Generation: ');
 })();
