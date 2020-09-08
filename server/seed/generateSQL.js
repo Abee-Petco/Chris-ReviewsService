@@ -384,7 +384,7 @@ const generateRecord = function () {
 /////////////////////////////////////
 //Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker (starting at 100) is being compared to
 /////////////////////////////////////
-console.time('Start Generation: ');
+console.time('The Full Deal: ');
 
 const writerItem = csvWriter({ sendHeaders: false });
 const writerUser = csvWriter({ sendHeaders: false });
@@ -429,5 +429,5 @@ writerYesNo.pipe(fs.createWriteStream('yeses_noes.csv'));
   writerUser.end();
   writerReviews.end();
   writerYesNo.end();
-  console.timeEnd('Finish Generation: ');
+  console.timeEnd('The Full Deal: ');
 })();
