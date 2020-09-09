@@ -55,6 +55,8 @@ const IndividualReview = mongoose.model(
 
 AggregateReview.syncIndexes();
 IndividualReview.syncIndexes();
+AggregateReview.ensureIndexes();
+individualReview.ensureIndexes();
 
 const retrieveAggregateReview = function (itemId) {
   return AggregateReview.findOne({ itemId }).select('-_id -itemId -__v').exec();

@@ -340,28 +340,7 @@ const generateRecord = function () {
     sum += randomlyGeneratedReviews[i].score;
   }
 
-  let reviewAverage = sum / numberOfReviews;
-
-  if (Number.isInteger(reviewAverage)) {
-    reviewAverage = `${reviewAverage}.0`;
-  } else {
-    const reviewAverageArray = reviewAverage.toString().split('');
-
-    if (reviewAverageArray[3]) {
-      if (Number.parseInt(reviewAverageArray[3], 10) >= 5) {
-        const tenthsPlace = Number.parseInt(reviewAverageArray[2], 10) + 1;
-
-        if (tenthsPlace === 10) {
-          reviewAverageArray[2] = '0';
-          reviewAverageArray[0] = (
-            Number.parseInt(reviewAverageArray[0], 10) + 1
-          ).toString();
-        }
-      }
-    }
-    const splitFinalNumber = reviewAverageArray.slice(0, 3);
-    reviewAverage = splitFinalNumber.join('');
-  }
+  const reviewAverage = +(sum / numberOfReviews).toFixed(1);
 
   const detailedItemReview = {
     itemId,
