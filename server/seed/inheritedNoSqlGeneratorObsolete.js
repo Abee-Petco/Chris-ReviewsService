@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 const { LoremIpsum } = require('lorem-ipsum');
 
 /////////////////////////////////////

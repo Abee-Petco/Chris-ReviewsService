@@ -25,7 +25,7 @@ EXPLAIN
 (ANALYZE true, VERBOSE TRUE, FORMAT TEXT, TIMING true)
 SELECT number_of_reviews, review_average
 FROM items
-WHERE item_id = 9476396;
+WHERE item_id = 1056;
 
 -- find average review, number of reviews, id for each review for an array of item_id's
 EXPLAIN
@@ -56,7 +56,7 @@ WITH insert1 AS (
     VALUES((SELECT review_id FROM insert1), 3, 1)
     RETURNING *
   )
-  SELECT * FROM insert2;
+  SELECT * FROM insert2, insert1;
 
   -- UPDATE a review by review_id
 

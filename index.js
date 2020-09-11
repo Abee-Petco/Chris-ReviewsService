@@ -4,40 +4,11 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
 const { IP_ADDRESS, IP_ADDRESS_E, IP_ADDRESS_K } = require('./server/environmentalVariables.js');
-// const {
-//   addId,
-//   addReview,
-//   updateReview,
-//   deleteReview,
-// } = require('./server/models/index.js');
-// const fs = require('fs');
-// var zlib = require('zlib');
-// const db = require('./server/db.js');
-// const {
-//   IP_ADDRESS,
-//   IP_ADDRESS_E,
-//   IP_ADDRESS_K,
-// } = require('./server/enviromentalVariables.js');
 
 const server = express();
 // eslint-disable-next-line import/no-absolute-path
 const pgdb = require('./server/models/pgmodels.js');
 
-// function generateGzipHTML () {
-//   fs.readFile(`${__dirname}/../client/src/index.html`, (error, data) => {
-//     if (error) {
-//       console.log(error);
-//     }
-//     var gzipped = zlib.gzipSync(data);
-//     fs.writeFile(`${__dirname}/../client/public/index.html`, gzipped, (error) => {
-//       if (error) {
-//         console.log(error);
-//       }
-//     })
-//   })
-// }
-
-// generateGzipHTML();
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(morgan('dev'));
@@ -67,17 +38,7 @@ server.use('*.js', function (req, res, next) {
   next();
 });
 
-// server.use('/', function (req, res, next) {
-//   const { url } = req;
-
-//   if (!url.includes('.png') && !url.includes('.ico') && !url.includes('averageReviews') && !url.includes('reviews')) {
-//     res.set('Content-Encoding', 'gzip');
-//   }
-//   next();
-// });
-
 server.use(serveStatic('./client/public'));
-// server.use('/test', serveStatic('./test'));
 
 server.get('/averageReviews/:itemId', (req, res) => {
   const { itemId } = req.params;
@@ -85,24 +46,12 @@ server.get('/averageReviews/:itemId', (req, res) => {
     const itemsInArray = itemId.substring(5);
     const itemIds = itemsInArray.split(',');
     const itemNumIds = itemIds.map((id) => +id);
-    // get itemsByItemIds
-    // db.retrieveAggregateReviews(itemNumIds)
-    //   .then((data) => {
-    //     if (data) {
-    //       res.status(200).send(data);
-    //     } else {
-    //       res.status(404).send('Items do not exist');
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).send(err);
-    //     console.log(err);
-    //   });
+
     pgdb
       .getItemsByIds(itemNumIds)
       .then((data) => {
-        if (data.rows) {
-          res.status(200).send(data.rows);
+        if (data) {
+          res.status(200).send(data);
         } else {
           res.status(404).send('Items do not exist');
         }
@@ -112,28 +61,12 @@ server.get('/averageReviews/:itemId', (req, res) => {
         console.log(err);
       });
   } else {
-    // get itemByItemId
-    // db.retrieveAggregateReview(+itemId)
-    //   .then((data) => {
-    //     if (data) {
-    //       const numberOfReviews = data.numberOfReviews;
-    //       const reviewAverage = `${data.reviewAverage}`;
-
-    //       res.status(200).send({ reviewAverage, numberOfReviews });
-    //     } else {
-    //       res.status(404).send('Item does not exist');
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).send(err);
-    //     console.log(err);
-    //   });
     pgdb
       .getItemById(itemId)
       .then((data) => {
-        if (data.rows) {
-          const numberOfReviews = data.rows[0].number_of_reviews;
-          const reviewAverage = data.rows[0].review_average;
+        if (data) {
+          const numberOfReviews = data[0].number_of_reviews;
+          const reviewAverage = `${data[0].review_average}`;
 
           res.status(200).send({ reviewAverage, numberOfReviews });
         } else {
@@ -146,81 +79,65 @@ server.get('/averageReviews/:itemId', (req, res) => {
       });
   }
 });
+
 // reviewsByItemId
 server.get('/reviews/:itemId', (req, res) => {
   const { itemId } = req.params;
-  // let aggregateReview;
+  const reviewsByItemId = {};
 
-  // // itemByitemId
-  // db.retrieveAggregateReview(itemId)
-  //   .then((data) => {
-  //     if (data) {
-  //       const allReviews = JSON.parse(data.allReviews);
-
-  //       aggregateReview = data;
-  //       aggregateReview.reviewAverage = `${aggregateReview.reviewAverage}`;
-  //       aggregateReview.itemId = `${aggregateReview.itemId}`;
-
-  //       return db.retrieveIndividualReviews(allReviews);
-  //     }
-  //     res.status(404).send('Item does not exist');
-  //     return false;
-  //   })
-  //   .then((data) => {
-  //     if (data) {
-  //       const reviewAverage = aggregateReview.reviewAverage;
-  //       const numberOfReviews = aggregateReview.numberOfReviews;
-
-  //       res.status(200).send({ reviewAverage, numberOfReviews, allReviews: data });
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send(err);
-  //     console.log(err);
-  //   });
-  pgdb.getReviewsByItemId(itemId).then((data) => {
-    if (data.rows) {
-    }
-  });
+  pgdb
+    .getReviewsByItemId(itemId)
+    .then((data) => {
+      if (data) {
+        reviewsByItemId.allReviews = data;
+        return reviewsByItemId;
+      }
+      res.status(404).send('Item does not exist');
+      return false;
+    })
+    .then((data) => {
+      if (data) {
+        pgdb.getItemById(itemId).then((result) => {
+          console.log('server', result);
+          reviewsByItemId.reviewAverage = `${result[0].review_average}`;
+          reviewsByItemId.numberOfReviews = result[0].number_of_reviews;
+          res.status(200).send(reviewsByItemId);
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 server.post('/reviews', (req, res) => {
-  const newReview = addId(req.body);
-  // newReview
-  //   .then((newReview) => {
-  //     addReview(newReview).then((doc) => {
-  //       console.log('Added', doc);
-  //       res.send(doc);
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     res.status(500).send('There was a problem, please refresh and try again.');
-  //   });
+  pgdb
+    .addReview(req.body)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 server.put('/reviews/:reviewId', (req, res) => {
   const id = req.params.reviewId;
-  const update = req.body;
 
-  // updateReview(id, update)
-  //   .then((doc) => {
-  //     res.send(doc);
-  //   })
-  //   .catch((err) => {
-  //     throw err;
-  //   });
+  pgdb
+    .updateReview(req.body.review, id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 server.delete('/reviews/:reviewId', (req, res) => {
-  const id = req.params.reviewId;
-  // deleteReview(id)
-  //   .then((result) => {
-  //     res.send(result);
-  //   })
-  //   .catch((err) => {
-  //     throw err;
-  //   });
+  pgdb.deleteReview(req.params.reviewId).then((result) => {
+    res.status(200).send(result);
+  });
 });
 
 server.get('/product', (req, res) => {
@@ -235,3 +152,36 @@ server.get('/product', (req, res) => {
 });
 
 module.exports = server;
+
+// const fs = require('fs');
+// var zlib = require('zlib');
+// const db = require('./server/db.js');
+// const {
+//   IP_ADDRESS,
+//   IP_ADDRESS_E,
+//   IP_ADDRESS_K,
+// } = require('./server/enviromentalVariables.js');
+
+// function generateGzipHTML () {
+//   fs.readFile(`${__dirname}/../client/src/index.html`, (error, data) => {
+//     if (error) {
+//       console.log(error);
+//     }
+//     var gzipped = zlib.gzipSync(data);
+//     fs.writeFile(`${__dirname}/../client/public/index.html`, gzipped, (error) => {
+//       if (error) {
+//         console.log(error);
+//       }
+//     })
+//   })
+// }
+// generateGzipHTML();
+
+// server.use('/', function (req, res, next) {
+//   const { url } = req;
+
+//   if (!url.includes('.png') && !url.includes('.ico') && !url.includes('averageReviews') && !url.includes('reviews')) {
+//     res.set('Content-Encoding', 'gzip');
+//   }
+//   next();
+// });
