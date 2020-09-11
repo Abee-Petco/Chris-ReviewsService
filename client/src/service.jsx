@@ -5,9 +5,9 @@ import updateReviewAverage from './ReduxSpecificComponents/Actions/updateReviewA
 import updateNumberOfReviews from './ReduxSpecificComponents/Actions/updateNumberOfReviews.js';
 import updateAllReviews from './ReduxSpecificComponents/Actions/updateAllReviews.js';
 import updateFilteredReviews from './ReduxSpecificComponents/Actions/updateFilteredReviews.js';
-import enviromentalVariables from './enviromentalVariables.js';
+import environmentalVariables from './environmentalVariables.js';
 
-const { IP_ADDRESS } = enviromentalVariables;
+const { IP_ADDRESS } = environmentalVariables;
 const { connect } = ReactRedux;
 
 class ReviewsModule extends React.Component {
@@ -16,7 +16,7 @@ class ReviewsModule extends React.Component {
       dispatchUpdateReviewAverage,
       dispatchUpdateNumberOfReviews,
       dispatchUpdateAllReviews,
-      dispatchUpdateFilteredReviews,
+      dispatchUpdateFilteredReviews
     } = this.props;
 
     let itemID = '100';
@@ -88,7 +88,7 @@ const mapDispatch = function (dispatch) {
     },
     dispatchUpdateFilteredReviews: (allReviews) => {
       dispatch(updateFilteredReviews(allReviews));
-    },
+    }
   };
 };
 

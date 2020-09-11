@@ -10,13 +10,13 @@ if (process.env.node_env === 'test') {
   mockgoose.prepareStorage().then(() => {
     mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     });
   });
 } else {
   mongoose.connect(`mongodb://${DATABASE_LOCAL_ADDRESS}/PTCReviewsService`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   });
 }
 
@@ -26,7 +26,7 @@ const aggregateReviewsSchema = new mongoose.Schema({
   itemId: { type: Number, index: true },
   reviewAverage: Number,
   numberOfReviews: Number,
-  allReviews: String,
+  allReviews: String
 });
 
 const individualReviewsSchema = new mongoose.Schema({
@@ -41,17 +41,11 @@ const individualReviewsSchema = new mongoose.Schema({
   yeses: Number,
   noes: Number,
   verified: Boolean,
-  promotion: Boolean,
+  promotion: Boolean
 });
 
-const AggregateReview = mongoose.model(
-  'Aggregate_Review',
-  aggregateReviewsSchema
-);
-const IndividualReview = mongoose.model(
-  'Individual_Review',
-  individualReviewsSchema
-);
+const AggregateReview = mongoose.model('Aggregate_Review', aggregateReviewsSchema);
+const IndividualReview = mongoose.model('Individual_Review', individualReviewsSchema);
 
 AggregateReview.syncIndexes();
 IndividualReview.syncIndexes();

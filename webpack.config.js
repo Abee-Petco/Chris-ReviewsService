@@ -5,15 +5,15 @@ module.exports = {
   mode: 'production',
   // mode: 'development',
   entry: {
-    './client/public/app.js': path.resolve(__dirname, 'client', 'src', 'index.jsx'),
+    './client/public/app.js': path.resolve(__dirname, 'client', 'src', 'index.jsx')
     // './client/public/index.html': path.resolve(__dirname, 'client', 'src', 'index.html'),
   },
   output: {
     path: path.resolve(__dirname),
-    filename: '[name]',
+    filename: '[name]'
   },
   node: {
-    fs: 'empty',
+    fs: 'empty'
   },
   plugins: [
     new CompressionPlugin({
@@ -21,8 +21,8 @@ module.exports = {
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/i,
       threshold: 10240,
-      minRatio: 0.8,
-    }),
+      minRatio: 0.8
+    })
   ],
   module: {
     rules: [
@@ -30,20 +30,20 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-react', '@babel/preset-env'],
-        },
+          presets: ['@babel/preset-react', '@babel/preset-env']
+        }
       },
       {
         test: /\.js?$/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env'],
-        },
-      },
+          presets: ['@babel/preset-env']
+        }
+      }
       // {
       //   test: /\.html$/i,
       //   loader: 'html-loader',
       // },
-    ],
-  },
+    ]
+  }
 };
