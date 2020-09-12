@@ -25,5 +25,5 @@ CREATE TABLE reviews (
 CREATE TABLE yeses_noes (
  yeses INTEGER DEFAULT 0,
  noes INTEGER DEFAULT 0,
- review_id_reviews INTEGER REFERENCES reviews(review_id)
+ review_id_reviews INTEGER REFERENCES reviews(review_id) ON DELETE CASCADE
 );

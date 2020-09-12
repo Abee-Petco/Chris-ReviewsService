@@ -1,6 +1,6 @@
-import enviromentalVariables from './enviromentalVariables.js';
+import environmentalVariables from './environmentalVariables.js';
 
-const { IP_ADDRESS } = enviromentalVariables;
+const { IP_ADDRESS } = environmentalVariables;
 
 //////dynamic stars
 const dynamicStarsGrayStars = {
@@ -12,7 +12,7 @@ const dynamicStarsGrayStars = {
   fontSize: 'inherit',
   color: '#ccc',
   lineSpacing: '1px',
-  letterSpacing: '-1px',
+  letterSpacing: '-1px'
 };
 
 //////reviewHeader
@@ -25,7 +25,7 @@ const reviewHeaderItemLink = {
   alignItems: 'center',
   padding: '8px 10px',
   height: '37px',
-  fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif',
+  fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif'
 };
 
 const reviewHeaderItemLinkLinklike = {
@@ -33,7 +33,7 @@ const reviewHeaderItemLinkLinklike = {
   color: '#005891',
   fontSize: '14px',
   fontWeight: '400',
-  fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif',
+  fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif'
 };
 
 const reviewHeaderItemLinkLinkNatureHidden = {
@@ -41,7 +41,7 @@ const reviewHeaderItemLinkLinkNatureHidden = {
   fontSize: '15.6px',
   fontWeight: '700',
   fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif',
-  margin: '0 0 1px 0',
+  margin: '0 0 1px 0'
 };
 
 const reviewHeaderListItem = {
@@ -49,7 +49,7 @@ const reviewHeaderListItem = {
   float: 'right',
   height: 'auto',
   width: '160px',
-  left: 'auto',
+  left: 'auto'
 };
 
 const reviewHeaderWrapper = {
@@ -60,7 +60,7 @@ const reviewHeaderWrapper = {
   backgroundColor: '#f7f7f7',
   flexShrink: '0',
   borderBottom: '1px solid',
-  borderColor: '#ccc',
+  borderColor: '#ccc'
 };
 
 const reviewHeaderTopHalf = {
@@ -68,7 +68,7 @@ const reviewHeaderTopHalf = {
   borderColor: '#ccc',
   width: 'auto',
   height: '30px',
-  padding: '10px 20px',
+  padding: '10px 20px'
 };
 
 const reviewHeaderReviewAverage = {
@@ -78,7 +78,7 @@ const reviewHeaderReviewAverage = {
   color: '#666',
   fontSize: '14px',
   fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif',
-  margin: '1px -1px 0 0',
+  margin: '1px -1px 0 0'
 };
 
 const reviewHeaderSearchBar = {
@@ -94,7 +94,7 @@ const reviewHeaderSearchBar = {
   fontFamily: '"Arial","Helvetica","Helvetica Neue",sans-serif',
   borderTopLeftRadius: '3.5px',
   borderBottomLeftRadius: '3.5px',
-  boxShadow: 'rgb(255, 255, 255) 0px 1px 1px 0px',
+  boxShadow: 'rgb(255, 255, 255) 0px 1px 1px 0px'
 };
 
 const reviewHeaderSearchBarButton = {
@@ -104,7 +104,7 @@ const reviewHeaderSearchBarButton = {
   border: 'none',
   margin: '10px 0',
   padding: '1px 0',
-  cursor: 'pointer',
+  cursor: 'pointer'
 };
 
 const reviewHeaderList = {
@@ -112,7 +112,7 @@ const reviewHeaderList = {
   height: '52px',
   width: '480px',
   float: 'right',
-  margin: '0 0 0 auto',
+  margin: '0 0 0 auto'
 };
 
 export {
@@ -126,5 +126,5 @@ export {
   reviewHeaderSearchBar,
   reviewHeaderSearchBarButton,
   reviewHeaderList,
-  dynamicStarsGrayStars,
+  dynamicStarsGrayStars
 };

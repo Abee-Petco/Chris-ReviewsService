@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 const { LoremIpsum } = require('lorem-ipsum');
 
 /////////////////////////////////////
@@ -9,28 +10,8 @@ const detailedItemReviews = [
     itemId: '100',
     reviewAverage: '3.5',
     numberOfReviews: 19,
-    allReviews: [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-    ],
-  },
+    allReviews: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  }
 ];
 
 const detailedIndividualReviews = [
@@ -46,7 +27,7 @@ const detailedIndividualReviews = [
     yeses: 5,
     noes: 1,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 2,
@@ -60,7 +41,7 @@ const detailedIndividualReviews = [
     yeses: 1,
     noes: 3,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 3,
@@ -74,7 +55,7 @@ const detailedIndividualReviews = [
     yeses: 5,
     noes: 0,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 4,
@@ -88,7 +69,7 @@ const detailedIndividualReviews = [
     yeses: 20,
     noes: 0,
     verified: false,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 5,
@@ -102,7 +83,7 @@ const detailedIndividualReviews = [
     yeses: 1,
     noes: 1,
     verified: true,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 6,
@@ -116,7 +97,7 @@ const detailedIndividualReviews = [
     yeses: 4,
     noes: 0,
     verified: true,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 7,
@@ -130,7 +111,7 @@ const detailedIndividualReviews = [
     yeses: 10,
     noes: 9,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 8,
@@ -144,21 +125,20 @@ const detailedIndividualReviews = [
     yeses: 2,
     noes: 3,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 9,
     score: 4,
     date: '2018-04-06T22:07:57.603Z',
     title: 'Curabitur ultrices tempus lorem',
-    review:
-      'Quisque dapibus, urna ac varius mattis, nisi nunc venenatis urna, a.',
+    review: 'Quisque dapibus, urna ac varius mattis, nisi nunc venenatis urna, a.',
     username: 'Bob',
     recommended: true,
     yeses: 10,
     noes: 10,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 10,
@@ -172,7 +152,7 @@ const detailedIndividualReviews = [
     yeses: 10,
     noes: 0,
     verified: false,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 11,
@@ -186,7 +166,7 @@ const detailedIndividualReviews = [
     yeses: 6,
     noes: 4,
     verified: true,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 12,
@@ -200,7 +180,7 @@ const detailedIndividualReviews = [
     yeses: 20,
     noes: 1,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 13,
@@ -214,7 +194,7 @@ const detailedIndividualReviews = [
     yeses: 0,
     noes: 4,
     verified: false,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 14,
@@ -228,7 +208,7 @@ const detailedIndividualReviews = [
     yeses: 3,
     noes: 4,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 15,
@@ -242,7 +222,7 @@ const detailedIndividualReviews = [
     yeses: 0,
     noes: 5,
     verified: true,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 16,
@@ -256,7 +236,7 @@ const detailedIndividualReviews = [
     yeses: 3,
     noes: 8,
     verified: false,
-    promotion: true,
+    promotion: true
   },
   {
     reviewId: 17,
@@ -269,7 +249,7 @@ const detailedIndividualReviews = [
     yeses: 0,
     noes: 0,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 18,
@@ -283,22 +263,21 @@ const detailedIndividualReviews = [
     yeses: 1,
     noes: 4,
     verified: true,
-    promotion: false,
+    promotion: false
   },
   {
     reviewId: 19,
     score: 1,
     date: '2020-02-14T22:07:57.603Z',
     title: 'Lorem ipsum dolor sit amet',
-    review:
-      'Donec eget ligula id mi tempor viverra nec quis felis. Proin in facilisis justo.',
+    review: 'Donec eget ligula id mi tempor viverra nec quis felis. Proin in facilisis justo.',
     username: 'Allison',
     recommended: false,
     yeses: 2,
     noes: 1,
     verified: true,
-    promotion: true,
-  },
+    promotion: true
+  }
 ];
 
 let itemIdTracker = 101;
@@ -322,7 +301,7 @@ const mapYeses = {
   6: 1,
   7: 1,
   8: 2,
-  9: 3,
+  9: 3
 };
 
 const generateYeses = function () {
@@ -351,8 +330,8 @@ const generateRecommended = function (score) {
 const LoremIpsumTitle = new LoremIpsum({
   wordsPerSentence: {
     max: 7,
-    min: 1,
-  },
+    min: 1
+  }
 });
 
 const generateReviewTitle = function () {
@@ -366,12 +345,12 @@ const generateReviewTitle = function () {
 const LoremIpsumText = new LoremIpsum({
   sentencesPerParagraph: {
     max: 5,
-    min: 1,
+    min: 1
   },
   wordsPerSentence: {
     max: 10,
-    min: 3,
-  },
+    min: 3
+  }
 });
 
 const reviewLengthMapping = {
@@ -384,14 +363,12 @@ const reviewLengthMapping = {
   6: 1,
   7: 1,
   8: 2,
-  9: 3,
+  9: 3
 };
 
 const generateReviewText = function () {
   const numberOfParagraphsRoll = Math.floor(Math.random() * 10);
-  return LoremIpsumText.generateParagraphs(
-    reviewLengthMapping[numberOfParagraphsRoll]
-  );
+  return LoremIpsumText.generateParagraphs(reviewLengthMapping[numberOfParagraphsRoll]);
 };
 
 /////////////////////////////////////
@@ -401,7 +378,7 @@ const scoreMapping = {
   5: 0.55,
   4: 0.4,
   3: 0.25,
-  2: 0.2,
+  2: 0.2
 };
 
 const generateScore = function () {
@@ -433,13 +410,13 @@ const generateScore = function () {
 const mapYear = {
   0: '2020',
   1: '2019',
-  2: '2018',
+  2: '2018'
 };
 
 const mapMonth = {
   2020: [1, 2, 3, 4, 5],
   2019: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  2018: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  2018: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
 const thirtyOneDayMonth = [
@@ -473,7 +450,7 @@ const thirtyOneDayMonth = [
   28,
   29,
   30,
-  31,
+  31
 ];
 const thirtyDayMonth = [
   1,
@@ -505,7 +482,7 @@ const thirtyDayMonth = [
   27,
   28,
   29,
-  30,
+  30
 ];
 const twentyEightDayMonth = [
   1,
@@ -535,7 +512,7 @@ const twentyEightDayMonth = [
   25,
   26,
   27,
-  28,
+  28
 ];
 
 const mapDay = {
@@ -550,7 +527,7 @@ const mapDay = {
   9: thirtyDayMonth,
   10: thirtyOneDayMonth,
   11: thirtyDayMonth,
-  12: thirtyOneDayMonth,
+  12: thirtyOneDayMonth
 };
 
 const generateDate = function () {
@@ -637,7 +614,7 @@ const generateReview = function () {
     yeses,
     noes,
     verified,
-    promotion,
+    promotion
   };
 };
 
@@ -681,9 +658,7 @@ const generateRecord = function () {
 
         if (tenthsPlace === 10) {
           reviewAverageArray[2] = '0';
-          reviewAverageArray[0] = (
-            Number.parseInt(reviewAverageArray[0], 10) + 1
-          ).toString();
+          reviewAverageArray[0] = (Number.parseInt(reviewAverageArray[0], 10) + 1).toString();
         }
       }
     }
@@ -695,7 +670,7 @@ const generateRecord = function () {
     itemId,
     reviewAverage,
     numberOfReviews,
-    allReviews,
+    allReviews
   });
   //go through all reviews, add them to detailedIndividualReviews, extract score and add to sum, so reviewAverage
   //can be calculated, also add reviewId to allReviews array
