@@ -3,17 +3,18 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
-const { IP_ADDRESS, IP_ADDRESS_E, IP_ADDRESS_K } = require('./server/environmentalVariables.js');
+const path = require('path');
+const { IP_ADDRESS, IP_ADDRESS_E, IP_ADDRESS_K } = require('./environmentalVariables.js');
 
-const server = express();
+const app = express();
 // eslint-disable-next-line import/no-absolute-path
-const pgdb = require('./server/models/pgmodels.js');
+const pgdb = require('../db/models');
 
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
-server.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
 
-server.use(function (req, res, next) {
+app.use(function (req, res, next) {
   const { referer } = req.headers;
 
   if (referer) {
@@ -32,15 +33,15 @@ server.use(function (req, res, next) {
   next();
 });
 
-server.use('*.js', function (req, res, next) {
+app.use('*.js', function (req, res, next) {
   req.url += '.gz';
   res.set('Content-Encoding', 'gzip');
   next();
 });
 
-server.use(serveStatic('./client/public'));
+app.use(serveStatic(path.join(__dirname, '../client/public')));
 
-server.get('/averageReviews/:itemId', (req, res) => {
+app.get('/averageReviews/:itemId', (req, res) => {
   const { itemId } = req.params;
   if (itemId.includes('array')) {
     const itemsInArray = itemId.substring(5);
@@ -81,7 +82,7 @@ server.get('/averageReviews/:itemId', (req, res) => {
 });
 
 // reviewsByItemId
-server.get('/reviews/:itemId', (req, res) => {
+app.get('/reviews/:itemId', (req, res) => {
   const { itemId } = req.params;
   const reviewsByItemId = {};
 
@@ -98,7 +99,7 @@ server.get('/reviews/:itemId', (req, res) => {
     .then((data) => {
       if (data) {
         pgdb.getItemById(itemId).then((result) => {
-          console.log('server', result);
+          console.log('app', result);
           reviewsByItemId.reviewAverage = `${result[0].review_average}`;
           reviewsByItemId.numberOfReviews = result[0].number_of_reviews;
           res.status(200).send(reviewsByItemId);
@@ -110,7 +111,7 @@ server.get('/reviews/:itemId', (req, res) => {
     });
 });
 
-server.post('/reviews', (req, res) => {
+app.post('/reviews', (req, res) => {
   pgdb
     .addReview(req.body)
     .then((data) => {
@@ -121,7 +122,7 @@ server.post('/reviews', (req, res) => {
     });
 });
 
-server.put('/reviews/:reviewId', (req, res) => {
+app.put('/reviews/:reviewId', (req, res) => {
   const id = req.params.reviewId;
 
   pgdb
@@ -134,33 +135,40 @@ server.put('/reviews/:reviewId', (req, res) => {
     });
 });
 
-server.delete('/reviews/:reviewId', (req, res) => {
-  pgdb.deleteReview(req.params.reviewId).then((result) => {
-    res.status(200).send(result);
-  });
+app.delete('/reviews/:reviewId', (req, res) => {
+  pgdb
+    .deleteReview(req.params.reviewId)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
-server.get('/product', (req, res) => {
+app.get('/product', (req, res) => {
   const { itemID } = req.query;
   const itemIdNumber = Number.parseInt(itemID, 10);
 
   if (itemIdNumber < 100 || itemIdNumber > 10000100 || itemIdNumber === undefined) {
     res.status(404).send('itemID invalid');
   } else {
-    res.sendFile(`${__dirname}/client/public/index.html`);
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
   }
 });
 
-module.exports = server;
+module.exports = app;
+
+// legacy code not sure will be needed
 
 // const fs = require('fs');
 // var zlib = require('zlib');
-// const db = require('./server/db.js');
+// const db = require('./app/db.js');
 // const {
 //   IP_ADDRESS,
 //   IP_ADDRESS_E,
 //   IP_ADDRESS_K,
-// } = require('./server/enviromentalVariables.js');
+// } = require('./app/enviromentalVariables.js');
 
 // function generateGzipHTML () {
 //   fs.readFile(`${__dirname}/../client/src/index.html`, (error, data) => {
@@ -177,7 +185,7 @@ module.exports = server;
 // }
 // generateGzipHTML();
 
-// server.use('/', function (req, res, next) {
+// app.use('/', function (req, res, next) {
 //   const { url } = req;
 
 //   if (!url.includes('.png') && !url.includes('.ico') && !url.includes('averageReviews') && !url.includes('reviews')) {
