@@ -1,13 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-const { Pool } = require('pg');
-
-const pool = new Pool({
-  user: 'chrish',
-  password: 'penguin',
-  host: '127.0.0.1',
-  database: 'petco_reviews'
-});
+const pool = require('../index.js');
 
 const itemByItemIdQuery = `
   SELECT items.item_id, items.number_of_reviews, items.review_average, reviews.review_id
