@@ -96,6 +96,7 @@ const controllers = {
         });
     },
     delete: (req, res) => {
+      console.log(req);
       pgdb
         .deleteReview(req.params.reviewId)
         .then((result) => {
