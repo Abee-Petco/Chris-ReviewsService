@@ -29,7 +29,8 @@ const reviewsByItemIdQuery = `
 
 const highestReviewIdQuery = `SELECT review_id FROM reviews ORDER BY review_id DESC LIMIT 1`;
 
-const addReviewQuery = `WITH insert1 AS (
+const addReviewQuery = `
+WITH insert1 AS (
   INSERT INTO reviews (review_id, score, date, title, review, recommended, promotion, user_id_users, item_id_items)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING *
@@ -39,7 +40,8 @@ const addReviewQuery = `WITH insert1 AS (
     VALUES((SELECT review_id FROM insert1), 3, 1)
     RETURNING *
   )
-  SELECT * FROM insert1, insert2`;
+  SELECT * FROM insert1, insert2
+  `;
 
 const deleteReviewQuery = `DELETE FROM reviews WHERE review_id = $1`;
 

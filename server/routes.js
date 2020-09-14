@@ -9,7 +9,7 @@ router.post('/reviews', controllers.reviews.post);
 
 router.put('/reviews/:reviewId', controllers.reviews.put);
 
-router.put('/reviews/:reviewId', controllers.reviews.delete);
+router.delete('/reviews/:reviewId', controllers.reviews.delete);
 
 router.get('/product', controllers.product.get);
 
