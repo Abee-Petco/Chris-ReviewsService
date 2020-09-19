@@ -1,16 +1,8 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const server = require('../../index.js');
-// const {
-//   retrieveIndividualReviews,
-//   IndividualReview,
-// } = require('../../server/db.js');
+const app = require('../../server/index.js');
+const controllers = require('../../server/controller/index.js');
 
 describe('server', () => {
-  afterAll(() => {
-    mongoose.connection.close();
-  });
-
   describe('root path', () => {
     it('should respond successfully to GET request', () => {
       return request(server)
@@ -30,9 +22,7 @@ describe('server', () => {
           expect(response.body).toHaveProperty('reviewAverage');
           expect(response.body).toHaveProperty('numberOfReviews');
           expect(response.body).toHaveProperty('allReviews');
-          expect(typeof +response.body.allReviews[0].reviewAverage).toBe(
-            'number'
-          );
+          expect(typeof +response.body.allReviews[0].reviewAverage).toBe('number');
           expect(response.body.allReviews[0]).toHaveProperty('date');
           expect(typeof response.body.allReviews[0].date).toBe('string');
           expect(response.body.allReviews[0]).toHaveProperty('title');
@@ -59,21 +49,20 @@ describe('server', () => {
       yeses: 0,
       noes: 0,
       verified: true,
-      promotion: true,
+      promotion: true
     };
 
     const newReview2 = {
       score: 4,
       date: '2018-02-18T20:20:00.603Z',
       title: 'Next new POSTed Review',
-      review:
-        'Sint consectetur dolor cupidatat. Ad nulla adipisicing nulla sint. Velit sint ea.',
+      review: 'Sint consectetur dolor cupidatat. Ad nulla adipisicing nulla sint. Velit sint ea.',
       username: 'commodo',
       recommended: true,
       yeses: 1,
       noes: 0,
       verified: true,
-      promotion: false,
+      promotion: false
     };
 
     it('Successfully adds review to the database', () => {
@@ -108,7 +97,7 @@ describe('server', () => {
       yeses: 0,
       noes: 0,
       verified: true,
-      promotion: true,
+      promotion: true
     };
     it('Successfully updates a review using the reviewId of existing Review', () => {
       return request(server)
@@ -145,7 +134,7 @@ describe('server', () => {
       yeses: 0,
       noes: 0,
       verified: true,
-      promotion: true,
+      promotion: true
     };
 
     it('successfully DELETES a review of specified reviewId', () => {
@@ -165,7 +154,6 @@ describe('server', () => {
               expect(response.statusCode).toBe(200);
               expect(JSON.parse(response.text).ok).toBe(1);
               expect(JSON.parse(response.text).deletedCount).toBe(1);
-              // return existingReview.reviewId;
             });
         });
     });
