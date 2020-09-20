@@ -31,7 +31,10 @@ export default function () {
   });
   const res = http.post(`http://127.0.0.1:3001/reviews`, newReview, { headers: headers });
   check(res, {
-    'is status 201': (r) => r.status === 201
+    'is status 201': (r) => {
+      // console.log('STATUS', r.body);
+      return r.status === 201;
+    }
   });
   sleep(1);
 }

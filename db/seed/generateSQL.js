@@ -15,7 +15,7 @@ const mapYeses = {
   6: 1,
   7: 1,
   8: 2,
-  9: 3,
+  9: 3
 };
 
 const generateYeses = function () {
@@ -44,12 +44,12 @@ const generateRecommended = function (score) {
 const lorem = new Ipsum({
   sentencesPerParagraph: {
     max: 3,
-    min: 1,
+    min: 1
   },
   wordsPerSentence: {
     min: 3,
-    max: 6,
-  },
+    max: 6
+  }
 });
 
 const generateReviewTitle = function () {
@@ -69,7 +69,7 @@ const reviewLengthMapping = {
   6: 1,
   7: 1,
   8: 2,
-  9: 3,
+  9: 3
 };
 
 const generateReviewText = function () {
@@ -85,7 +85,7 @@ const scoreMapping = {
   5: 0.55,
   4: 0.4,
   3: 0.25,
-  2: 0.2,
+  2: 0.2
 };
 
 const generateScore = function () {
@@ -117,13 +117,13 @@ const generateScore = function () {
 const mapYear = {
   0: '2020',
   1: '2019',
-  2: '2018',
+  2: '2018'
 };
 
 const mapMonth = {
   2020: [1, 2, 3, 4, 5],
   2019: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  2018: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  2018: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 };
 
 const thirtyOneDayMonth = [
@@ -157,7 +157,7 @@ const thirtyOneDayMonth = [
   28,
   29,
   30,
-  31,
+  31
 ];
 const thirtyDayMonth = [
   1,
@@ -189,7 +189,7 @@ const thirtyDayMonth = [
   27,
   28,
   29,
-  30,
+  30
 ];
 const twentyEightDayMonth = [
   1,
@@ -219,7 +219,7 @@ const twentyEightDayMonth = [
   25,
   26,
   27,
-  28,
+  28
 ];
 
 const mapDay = {
@@ -234,7 +234,7 @@ const mapDay = {
   9: thirtyDayMonth,
   10: thirtyOneDayMonth,
   11: thirtyDayMonth,
-  12: thirtyOneDayMonth,
+  12: thirtyOneDayMonth
 };
 
 const generateDate = function () {
@@ -283,12 +283,12 @@ const generateDate = function () {
 /////////////////////////////////////
 
 let itemIdTracker = 100;
-let individualReviewCounter = 1;
+// let individualReviewCounter = 1;
 let userTracker = 1;
 let yesNoTracker = 1;
 
 const generateReview = function () {
-  const review_id = individualReviewCounter;
+  // const review_id = individualReviewCounter;
   const score = generateScore();
   const date = generateDate();
   const title = generateReviewTitle();
@@ -299,7 +299,6 @@ const generateReview = function () {
   const item_id_items = itemIdTracker;
 
   return {
-    review_id,
     score,
     date,
     title,
@@ -307,7 +306,7 @@ const generateReview = function () {
     recommended,
     promotion,
     user_id_users,
-    item_id_items,
+    item_id_items
   };
 };
 
@@ -318,7 +317,7 @@ const generateUser = () => {
   return {
     user_id: userTracker,
     username,
-    verified,
+    verified
   };
 };
 
@@ -331,7 +330,7 @@ const generateYandN = (number) => {
     const yesNos = {
       yeses,
       noes,
-      review_id_reviews: yesNoTracker,
+      review_id_reviews: yesNoTracker
     };
     yesAndNos.push(yesNos);
     yesNoTracker++;
@@ -348,7 +347,7 @@ const generateReviews = function (numberToGenerate) {
     const review = generateReview();
 
     reviews.push(review);
-    individualReviewCounter++;
+    // individualReviewCounter++;
     count--;
   }
 
@@ -366,7 +365,7 @@ const generateRecord = function () {
   userTracker++;
 
   for (let i = 0; i < reviews.length; i++) {
-    allReviews.push(reviews[i].review_id);
+    allReviews.push(Math.ceil(Math.random() * 29500000));
     sum += reviews[i].score;
   }
 
@@ -375,21 +374,32 @@ const generateRecord = function () {
   const item = {
     item_id: itemIdTracker,
     review_average,
-    number_of_reviews,
+    number_of_reviews
   };
 
   return [item, reviews, user, yeses_noes];
 };
 
-/////////////////////////////////////
-//Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker (starting at 100) is being compared to
-/////////////////////////////////////
+// ///////////////////////////////////
+// Initiate randomly generated data - to increase/decrease amount of randomly generated records, alter the number itemIdTracker (starting at 100) is being compared to
+// ///////////////////////////////////
 console.time('The Full Deal: ');
 
 const writerItem = csvWriter({ sendHeaders: false });
 const writerUser = csvWriter({ sendHeaders: false });
-const writerReviews = csvWriter({ sendHeaders: false });
-const writerYesNo = csvWriter({ sendHeaders: false });
+const writerReviews = csvWriter({
+  headers: [
+    'score',
+    'date',
+    'title',
+    'review',
+    'recommended',
+    'promotion',
+    'user_id_users',
+    'item_id_items'
+  ]
+});
+const writerYesNo = csvWriter({ headers: ['yeses', 'noes'] });
 
 writerItem.pipe(fs.createWriteStream('items.csv'));
 writerReviews.pipe(fs.createWriteStream('reviews.csv'));

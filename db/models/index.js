@@ -27,20 +27,19 @@ const reviewsByItemIdQuery = `
   WHERE item_id_items = $1
 `;
 
-const highestReviewIdQuery = `SELECT review_id FROM reviews ORDER BY review_id DESC LIMIT 1`;
+// const highestReviewIdQuery = `SELECT review_id FROM reviews ORDER BY review_id DESC LIMIT 1`;
 
 const addReviewQuery = `
 WITH insert1 AS (
-  INSERT INTO reviews (review_id, score, date, title, review, recommended, promotion, user_id_users, item_id_items)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-  RETURNING *
+  INSERT INTO reviews (score, date, title, review, recommended, promotion, user_id_users, item_id_items)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
   ),
   insert2 AS (
-    INSERT INTO yeses_noes (review_id_reviews, yeses, noes)
-    VALUES((SELECT review_id FROM insert1), 3, 1)
-    RETURNING *
+    INSERT INTO yeses_noes (yeses, noes)
+    VALUES(3, 1)
+    RETURNING review_id_reviews
   )
-  SELECT * FROM insert1, insert2
+  SELECT review_id_reviews FROM insert2
   `;
 
 const deleteReviewQuery = `DELETE FROM reviews WHERE review_id = $1`;
@@ -103,28 +102,20 @@ const getItemsByIds = (arr) => {
 };
 
 const addReview = (document) => {
+  const values = [
+    document.score,
+    document.date,
+    document.title,
+    document.review,
+    document.recommended,
+    document.promotion,
+    document.user_id_users,
+    document.item_id_items
+  ];
   return pool
-    .query(highestReviewIdQuery)
+    .query(addReviewQuery, values)
     .then((result) => {
-      const new_review_id = result.rows[0].review_id + 1;
-      document.review_id = new_review_id;
-      return document;
-    })
-    .then((data) => {
-      const values = [
-        data.review_id,
-        data.score,
-        data.date,
-        data.title,
-        data.review,
-        data.recommended,
-        data.promotion,
-        data.user_id_users,
-        data.item_id_items
-      ];
-      return pool.query(addReviewQuery, values).then((result) => {
-        return result.rows;
-      });
+      return result.rows[0].review_id_reviews;
     })
     .catch((err) => {
       throw err;

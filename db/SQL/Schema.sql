@@ -11,7 +11,7 @@ CREATE TABLE items (
 );
 
 CREATE TABLE reviews (
- review_id INTEGER PRIMARY KEY,
+ review_id SERIAL PRIMARY KEY,
  score INTEGER NOT NULL DEFAULT 1,
  date VARCHAR NOT NULL,
  title VARCHAR NOT NULL,
@@ -23,7 +23,8 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE yeses_noes (
+ review_id_reviews SERIAL UNIQUE REFERENCES reviews(review_id) ON DELETE CASCADE,
  yeses INTEGER DEFAULT 0,
- noes INTEGER DEFAULT 0,
- review_id_reviews INTEGER REFERENCES reviews(review_id) ON DELETE CASCADE
+ noes INTEGER DEFAULT 0
 );
+
