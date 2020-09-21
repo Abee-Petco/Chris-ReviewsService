@@ -62,7 +62,6 @@ const controllers = {
         .then((data) => {
           if (data) {
             pgdb.getItemById(itemId).then((result) => {
-              console.log('app', result);
               reviewsByItemId.reviewAverage = `${result[0].review_average}`;
               reviewsByItemId.numberOfReviews = result[0].number_of_reviews;
               res.status(200).send(reviewsByItemId);
@@ -77,7 +76,7 @@ const controllers = {
       pgdb
         .addReview(req.body)
         .then((data) => {
-          res.status(200).send(data);
+          res.status(201).send('success');
         })
         .catch((err) => {
           res.status(500).send(err);
@@ -96,7 +95,6 @@ const controllers = {
         });
     },
     delete: (req, res) => {
-      console.log(req);
       pgdb
         .deleteReview(req.params.reviewId)
         .then((result) => {
@@ -110,11 +108,13 @@ const controllers = {
 
   product: {
     get: (req, res) => {
-      const { itemID } = req.query;
+      console.log('recieved');
+      const itemID = req.query.itemID;
       const itemIdNumber = Number.parseInt(itemID, 10);
+      console.log(itemIdNumber);
 
       if (itemIdNumber < 100 || itemIdNumber > 10000100 || itemIdNumber === undefined) {
-        res.status(404).send('itemID invalid');
+        res.status(404).send('itemId invalid');
       } else {
         res.sendFile(path.join(__dirname, '../../client/public/index.html'));
       }

@@ -1,7 +1,6 @@
 /* eslint-disable func-names */
 require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
 const path = require('path');
@@ -11,7 +10,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('dev'));
 
 app.use(function (req, res, next) {
   const { referer } = req.headers;

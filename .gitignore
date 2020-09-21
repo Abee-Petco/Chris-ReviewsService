@@ -9,3 +9,6 @@ bashScript6.sh
 bashScript7.sh
 *.csv
 .env
+newrelic.js
+newrelic_agent.log
+
