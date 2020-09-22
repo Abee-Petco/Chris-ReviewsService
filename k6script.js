@@ -1,6 +1,6 @@
 import { check, sleep } from 'k6';
 import http from 'k6/http';
-import idStrings from './k6RandomIds.js';
+// import idStrings from './k6RandomIds.js';
 
 export const options = {
   stages: [
@@ -16,9 +16,10 @@ export const options = {
   ]
 };
 
+// Post new review stress test script below
 export default function () {
   const headers = { 'Content-Type': 'application/json' };
-  const newReview = JSON.stringify({
+  const newReview = {
     score: 5,
     date: '2020-03-15T22: 07: 57.603Z',
     title: 'massa vulputate bibendum auctor',
@@ -28,13 +29,79 @@ export default function () {
     promotion: true,
     user_id_users: 947586,
     item_id_items: 946375
-  });
-  const res = http.post(`http://127.0.0.1:3001/reviews`, newReview, { headers: headers });
+  };
+  const res = http.post(`http://127.0.0.1:3001/reviews`, newReview, headers);
+
   check(res, {
     'is status 201': (r) => {
-      // console.log('STATUS', r.body);
       return r.status === 201;
     }
   });
   sleep(1);
 }
+
+// Variations for different routes
+
+// before cache below GET averageReviewsByItemId
+// export default function () {
+//   const res = http.post(`http://127.0.0.1:3001/averageReviews/${Math.ceil(Math.random() * 10000000 + 100)}`);
+
+//   check(res, {
+//     'is status 200': (r) => {
+//       return r.status === 200;
+//     }
+//   });
+//   sleep(1);
+// }
+
+// after cache below GET averageReviewsByItemId
+// export default function () {
+//   const res = http.post(`http://127.0.0.1:3001/averageReviews/${Math.ceil(Math.random() * 1000 + 9999100)}`);
+
+//   check(res, {
+//     'is status 200': (r) => {
+//       return r.status === 200;
+//     }
+//   });
+//   sleep(1);
+// }
+
+// before and after cache below GET averageReviewsByItemIds
+// export default function () {
+//  const res = http.post(`http://127.0.0.1:3001/averageReviews/array${idStrings[Math.floor(Math.random() * 1000)]}`);
+
+//  check(res, {
+//    'is status 200': (r) => {
+//     return r.status === 200;
+//    }
+//  });
+//    sleep(1);
+//  }
+
+// before cache below - GET reviewsByItemId
+// export default function () {
+//   const res = http.post(
+//     `http://127.0.0.1:3001/reviews/${Math.ceil(Math.random() * 10000000 +100)}`
+//   );
+
+//   check(res, {
+//     'is status 201': (r) => {
+//       return r.status === 201;
+//     }
+//   });
+//   sleep(1);
+// }
+
+// after cache below GET reviwsByItemId
+// export default function () {
+//   const res = http.post(
+//     `http://127.0.0.1:3001/reviews/${Math.ceil(Math.random() * 1000 + 9999100)}`
+//   );
+
+//   check(res, {
+//     'is status 201': (r) => {
+//       return r.status === 201;
+//     }
+//   });
+//   sleep(1);
+// }
