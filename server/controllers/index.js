@@ -76,7 +76,7 @@ const controllers = {
       pgdb
         .addReview(req.body)
         .then((data) => {
-          res.status(201).send('success');
+          res.status(201).send(`success, new review ID: ${data}`);
         })
         .catch((err) => {
           res.status(500).send(err);

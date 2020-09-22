@@ -46,16 +46,15 @@ DELETE FROM reviews WHERE review_id = 30001863;
 EXPLAIN
 (ANALYZE true, VERBOSE TRUE, FORMAT TEXT, TIMING true)
 WITH insert1 AS (
-  INSERT INTO reviews (review_id, score, date, title, review, recommended, promotion, user_id_users, item_id_items)
-  VALUES (30001856, 3, '2019-05-06T22:07:57.603Z', 'Im an inserted title', 'Absolutely terrible', 'f', 'f', 9834567, 9999993)
-  RETURNING *
+  INSERT INTO reviews (score, date, title, review, recommended, promotion, user_id_users, item_id_items)
+  VALUES (3, '2019-05-06T22:07:57.603Z', 'Im an inserted title', 'Absolutely terrible', 'f', 'f', 9834567, 9999993)
   ),
   insert2 AS (
-    INSERT INTO yeses_noes (review_id_reviews, yeses, noes)
-    VALUES((SELECT review_id FROM insert1), 3, 1)
-    RETURNING *
+    INSERT INTO yeses_noes (yeses, noes)
+    VALUES(3, 1)
+    RETURNING review_id_reviews
   )
-  SELECT * FROM insert2, insert1;
+  SELECT review_id_reviews FROM insert2;
 
   -- UPDATE a review by review_id
 
