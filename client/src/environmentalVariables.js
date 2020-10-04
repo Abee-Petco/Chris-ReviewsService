@@ -5,7 +5,7 @@
 
 //Deployment mode environmental variables
 const environmentalVariables = {
-  IP_ADDRESS: '3.128.147.43'
+  IP_ADDRESS: 'ec2-3-128-147-43.us-east-2.compute.amazonaws.com'
 };
 
 export default environmentalVariables;
