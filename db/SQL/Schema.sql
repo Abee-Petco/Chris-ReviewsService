@@ -28,3 +28,17 @@ CREATE TABLE yeses_noes (
  noes INTEGER DEFAULT 0
 );
 
+
+/* for use with ec2 deployed postgres database, instead of the above CREATE TABLE for 'reviews' - add foreign keys after seeding */
+
+/* CREATE TABLE reviews (
+ review_id SERIAL PRIMARY KEY,
+ score INTEGER NOT NULL DEFAULT 1,
+ date VARCHAR NOT NULL,
+ title VARCHAR NOT NULL,
+ review TEXT NOT NULL,
+ recommended BOOLEAN NOT NULL,
+ promotion BOOLEAN NOT NULL,
+ user_id_users INTEGER NOT NULL ,
+ item_id_items INTEGER DEFAULT 100
+); */
