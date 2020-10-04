@@ -3,32 +3,56 @@
   <head>
     <title>Reviews Service</title>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js" defer></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" defer></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" defer></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js" defer></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.0/react-redux.min.js" defer></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"
+      defer
+    ></script>
+    <script
+      crossorigin
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+      defer
+    ></script>
+    <script
+      crossorigin
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"
+      defer
+    ></script>
+    <script
+      crossorigin
+      src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.2.0/react-redux.min.js"
+      defer
+    ></script>
     <script crossorigin src="https://momentjs.com/downloads/moment.min.js" defer></script>
   </head>
   <body>
     <div
       id="MODAL_ATTACH_POINT"
-      style="position: absolute; top: -20px; left: -20px; visibility: hidden; overflow: hidden; background-color: rgba(0, 0, 0, 0.4); z-index: 100;"
+      style="
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        visibility: hidden;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 100;
+      "
     ></div>
-    <div style="display: flex;">
-      <div style="width: 21.3%;"> </div>
+    <div style="display: flex">
+      <div style="width: 21.3%"></div>
       <div id="REVIEWS_ATTACH_POINT"></div>
-      <div style="width: 21.3%;"> </div>
+      <div style="width: 21.3%"></div>
     </div>
   </body>
 
   <script async>
-    const callback = function() {
+    const callback = function () {
       const body = document.body;
 
       let height = body.scrollHeight + 40;
       let width = body.scrollWidth + 40;
 
-      const modalAttachPoint = document.getElementById("MODAL_ATTACH_POINT");
+      const modalAttachPoint = document.getElementById('MODAL_ATTACH_POINT');
 
       modalAttachPoint.style.height = `${height}px`;
       modalAttachPoint.style.width = `${width}px`;
@@ -43,22 +67,24 @@
   </script>
 
   <script async>
-    document.addEventListener('DOMContentLoaded', function() {
-      const N_IP = '127.0.0.1';
+    document.addEventListener('DOMContentLoaded', function () {
+      // const N_IP = '127.0.0.1';
 
-      // const N_IP = '54.183.137.155';
+      const N_IP = '3.128.147.43';
 
       const url = `http://${N_IP}:3001/app.js`;
 
       // const url = 'https://dlxdbr1ckg1lj.cloudfront.net/reviews/app.js';
 
-      axios.get(url)
-        .then((response) => {
-          eval(response.data)
-        })
-    })
+      axios.get(url).then((response) => {
+        eval(response.data);
+      });
+    });
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" defer>
-
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+    rel="stylesheet"
+    defer
+  />
 </html>

@@ -11,8 +11,13 @@ const cacheMiddleware = (duration) => {
     const cacheContent = memCache.get(key);
 
     if (cacheContent) {
-      res.send(JSON.parse(cacheContent));
-      return;
+      try {
+        const responseData = JSON.parse(cacheContent);
+        res.send(responseData);
+        return;
+      } catch (err) {
+        res.send(err);
+      }
     }
     res.sendResponse = res.send;
     res.send = (body) => {

@@ -8,8 +8,8 @@
     "testSDC": "jest __tests__/SDCTests/ --env=node --verbose false --watch",
     "genNoSQL": "node server/seed/generateNoSQL",
     "genSQL": "node db/seed/generateSQL",
-    "server": "node index.js",
-    "build": "webpack",
+    "server": "node server/index.js",
+    "build": "webpack -p",
     "start": "node_env=\"development\" nodemon server/server.js",
     "start:test": "node_env=\"test\" nodemon server/server.js"
   },

@@ -108,10 +108,13 @@ const controllers = {
 
   product: {
     get: (req, res) => {
-      console.log('recieved');
-      const itemID = req.query.itemID;
+      let itemID = '121';
+      // console.log('received');
+      if (req.query.itemID) {
+        itemID = req.query.itemID;
+      }
       const itemIdNumber = Number.parseInt(itemID, 10);
-      console.log(itemIdNumber);
+      // console.log(itemIdNumber);
 
       if (itemIdNumber < 100 || itemIdNumber > 10000100 || itemIdNumber === undefined) {
         res.status(404).send('itemId invalid');
