@@ -16,11 +16,9 @@ app.use(function (req, res, next) {
 
   if (referer) {
     if (referer.includes(`http://${process.env.IP_ADDRESS}:3000`)) {
-      res.header('Access-Control-Allow-Origin', `http://${process.env.IP_ADDRESS}:3000`);
-    } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3005`)) {
-      res.header('Access-Control-Allow-Origin', `http://${process.env.IP_ADDRESS}:3005`);
-    } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3004`)) {
-      res.header('Access-Control-Allow-Origin', `http://${process.env.IP_ADDRESS}:3004`);
+      res.set('Access-Control-Allow-Origin', '*');
+    } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3001`)) {
+      res.set('Access-Control-Allow-Origin', '*');
     }
   }
   next();
