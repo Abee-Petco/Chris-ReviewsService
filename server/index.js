@@ -32,7 +32,9 @@ app.use('*.js', function (req, res, next) {
 
 app.use(router);
 
-app.use(serveStatic(path.join(__dirname, '../client/public')));
+app.use(serveStatic(path.join(__dirname, '../client/public')), (res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+});
 
 module.exports = app;
 
