@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
   const { referer } = req.headers;
 
   if (referer) {
-    if (referer.includes(`http://${process.env.IP_ADDRESS}:3000`)) {
+    if (referer.includes(`http://${process.env.PROXY_IP_ADDRESS}:3000`)) {
       res.set('Access-Control-Allow-Origin', '*');
     } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3001`)) {
       res.set('Access-Control-Allow-Origin', '*');
@@ -32,9 +32,7 @@ app.use('*.js', function (req, res, next) {
 
 app.use(router);
 
-app.use(serveStatic(path.join(__dirname, '../client/public')), (res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-});
+app.use(serveStatic(path.join(__dirname, '../client/public')));
 
 module.exports = app;
 
