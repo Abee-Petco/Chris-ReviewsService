@@ -1,4 +1,4 @@
-// require('newrelic');
+require('newrelic');
 const app = require('./index.js');
 
 console.log(process.env.node_env);
