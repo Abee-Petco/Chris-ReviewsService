@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
   if (referer) {
     if (referer.includes(`http://${process.env.PROXY_IP_ADDRESS}:3000`)) {
       res.set('Access-Control-Allow-Origin', '*');
-    } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3001`)) {
+    } else if (referer.includes(`http://${process.env.IP_ADDRESS}:3009`)) {
       res.set('Access-Control-Allow-Origin', '*');
     }
   }
@@ -35,38 +35,3 @@ app.use(router);
 app.use(serveStatic(path.join(__dirname, '../client/public')));
 
 module.exports = app;
-
-// legacy code not sure will be needed
-
-// const fs = require('fs');
-// var zlib = require('zlib');
-// const db = require('./app/db.js');
-// const {
-//   IP_ADDRESS,
-//   IP_ADDRESS_E,
-//   IP_ADDRESS_K,
-// } = require('./app/enviromentalVariables.js');
-
-// function generateGzipHTML () {
-//   fs.readFile(`${__dirname}/../client/src/index.html`, (error, data) => {
-//     if (error) {
-//       console.log(error);
-//     }
-//     var gzipped = zlib.gzipSync(data);
-//     fs.writeFile(`${__dirname}/../client/public/index.html`, gzipped, (error) => {
-//       if (error) {
-//         console.log(error);
-//       }
-//     })
-//   })
-// }
-// generateGzipHTML();
-
-// app.use('/', function (req, res, next) {
-//   const { url } = req;
-
-//   if (!url.includes('.png') && !url.includes('.ico') && !url.includes('averageReviews') && !url.includes('reviews')) {
-//     res.set('Content-Encoding', 'gzip');
-//   }
-//   next();
-// });
