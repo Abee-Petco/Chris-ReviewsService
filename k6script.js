@@ -2,7 +2,7 @@ import { check, sleep } from 'k6';
 import http from 'k6/http';
 // import idStrings from './k6RandomIds.js';
 
-export const options = {
+/*export const options = {
   stages: [
     { duration: '2m', target: 1 }, // below normal load
     { duration: '5m', target: 1 },
@@ -104,4 +104,17 @@ export default function () {
 //     }
 //   });
 //   sleep(1);
-// }
+// }*/
+export default function () {
+  const res = http.get(
+    `http://ec2-18-191-202-18.us-east-2.compute.amazonaws.com/reviews/${Math.ceil(
+      Math.random() * 1000000 + 9000000
+    )}`
+  );
+  check(res, {
+    'is status 200': (r) => {
+      return r.status === 200;
+    }
+  });
+  sleep(1);
+}

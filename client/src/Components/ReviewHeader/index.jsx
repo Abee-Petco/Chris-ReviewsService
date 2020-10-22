@@ -13,7 +13,7 @@ import {
 } from '../../CSSstyles.js';
 import environmentalVariables from '../../environmentalVariables.js';
 
-const { IP_ADDRESS } = environmentalVariables;
+const { IMAGE_IP_ADDRESS } = environmentalVariables;
 const { connect } = ReactRedux;
 
 class ReviewHeader extends React.Component {
@@ -57,14 +57,14 @@ class ReviewHeader extends React.Component {
     const { id } = e.target;
     document.getElementById(
       id
-    ).style.backgroundImage = `url("http://${IP_ADDRESS}:3001/searchMagnifyingGlassHover.png")`;
+    ).style.backgroundImage = `url("http://${IMAGE_IP_ADDRESS}:3001/searchMagnifyingGlassHover.png")`;
   }
 
   changeImageOnMouseOut(e) {
     const { id } = e.target;
     document.getElementById(
       id
-    ).style.backgroundImage = `url("http://${IP_ADDRESS}:3001/searchMagnifyingGlass.png")`;
+    ).style.backgroundImage = `url("http://${IMAGE_IP_ADDRESS}:3001/searchMagnifyingGlass.png")`;
   }
 
   smoothScrollReviews(e) {

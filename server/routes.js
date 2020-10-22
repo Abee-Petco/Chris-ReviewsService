@@ -13,6 +13,7 @@ const cacheMiddleware = (duration) => {
     if (cacheContent) {
       try {
         const responseData = JSON.parse(cacheContent);
+
         res.send(responseData);
         return;
       } catch (err) {
@@ -29,9 +30,9 @@ const cacheMiddleware = (duration) => {
   };
 };
 
-router.get('/averageReviews/:itemId', cacheMiddleware(30), controllers.averageReviews.get);
+router.get('/averageReviews/:itemId', cacheMiddleware(60), controllers.averageReviews.get);
 
-router.get('/reviews/:itemId', cacheMiddleware(30), controllers.reviews.get);
+router.get('/reviews/:itemId', cacheMiddleware(60), controllers.reviews.get);
 
 router.post('/reviews', controllers.reviews.post);
 
@@ -39,6 +40,6 @@ router.put('/reviews/:reviewId', controllers.reviews.put);
 
 router.delete('/reviews/:reviewId', controllers.reviews.delete);
 
-router.get('/product', cacheMiddleware(30), controllers.product.get);
+router.get('/product', controllers.product.get);
 
 module.exports = router;
