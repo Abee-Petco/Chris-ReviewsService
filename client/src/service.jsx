@@ -37,7 +37,7 @@ class ReviewsModule extends React.Component {
     }
 
     axios
-      .get(`http://${IP_ADDRESS}:3009/${itemID}`)
+      .get(`http://${IP_ADDRESS}:3001/reviews/${itemID}`)
       .then((results) => {
         const { reviewAverage, numberOfReviews, allReviews } = results.data;
 
