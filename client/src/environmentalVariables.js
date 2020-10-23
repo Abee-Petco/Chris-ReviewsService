@@ -1,6 +1,7 @@
 //Service and Development mode environmental variables
 const environmentalVariables = {
-  IP_ADDRESS: '127.0.0.1'
+  IP_ADDRESS: '127.0.0.1',
+  IMAGE_IP_ADDRESS: '127.0.0.1'
 };
 
 //Deployment mode environmental variables
