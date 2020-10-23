@@ -7,6 +7,6 @@ const environmentalVariables = {
 //Deployment mode environmental variables
 // const environmentalVariables = {
 //   IP_ADDRESS: '54.183.137.155',
-// };
+// }
 
 export default environmentalVariables;

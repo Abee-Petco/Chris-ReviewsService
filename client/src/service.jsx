@@ -37,7 +37,7 @@ class ReviewsModule extends React.Component {
     }
 
     axios
-      .get(`http://${IP_ADDRESS}:3001/reviews/${itemID}`)
+      .get(`http://${IP_ADDRESS}:3009/${itemID}`)
       .then((results) => {
         const { reviewAverage, numberOfReviews, allReviews } = results.data;
 
@@ -65,7 +65,7 @@ class ReviewsModule extends React.Component {
         style={{ display: 'flex', flexDirection: 'column', flexShrink: '0' }}
       >
         {/*The tag directly below this is for testing purposes only. Make sure to comment out before building for production*/}
-        <div id="MODAL_ATTACH_POINT" />
+        {/* <div id="MODAL_ATTACH_POINT" /> */}
         <ReviewHeader />
         <ReviewBody />
         <Reviews />
