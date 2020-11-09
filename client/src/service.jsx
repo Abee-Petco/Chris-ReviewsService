@@ -54,6 +54,7 @@ class ReviewsModule extends React.Component {
       })
       .catch((err) => {
         console.log(err);
+        alert('Please refresh and try agian with id between 100 - 10000100');
       });
   }
 
