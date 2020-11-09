@@ -36,9 +36,11 @@ From application root folder:
 
 4. run npm start
 
-5. To see the reviews service in action, visit: http://127.0.0.1:3001/product?itemID=### where ### is a number 100-10000100
+5. To interact with the reviews service visit: http://127.0.0.1:3001/product?itemID=### where ### is a number 100-10000100
 
-6. To run the service's tests, follow these steps:
+6. To see quick demo - https://drive.google.com/file/d/1fRM4RurYy2Fv_x31J82Y3_FK-uaZBltl/view?usp=sharing
+
+7. To run the service's tests, follow these steps:
    a. Open ./client/src/service.jsx
    b. There is a line of code with 'MODAL_ATTACH_POINT' as part of its code. Uncomment this and save the file. Don't forget to re-comment-out and save if you want to continue exploring the service.
    c. Then from the terminal within the service's root directory enter 'npm run test'.
@@ -114,7 +116,7 @@ This endpoint will also handle arrays if entered in the format: `/averageReviews
 ]
 ```
 
-**Endpoint:**
+**Endpoint:** This endpoint returns all reviews for a given product id.
 
     /reviews/:itemId
 
