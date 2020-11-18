@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest __tests__/componentTests/ --runInBand --silent --coverage",
-    "testSDC": "jest __tests__/SDCTests/ --env=node --verbose false --watch",
+    "testSDC": "jest __tests__/SDCTests/ --env=node --watch",
     "genNoSQL": "node server/seed/generateNoSQL",
     "genSQL": "node db/seed/generateSQL",
     "server": "node server/index.js",
